@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { 
   Mail, 
   Phone, 
@@ -25,10 +26,10 @@ const Footer = () => {
 
   const footerLinks = {
     company: [
-      { label: "Sobre Nós", href: "#about" },
-      { label: "Nossos Cursos", href: "#courses" },
-      { label: "Serviços", href: "#services" },
-      { label: "Contacto", href: "#contact" }
+      { label: "Sobre Nós", href: "/sobre" },
+      { label: "Nossos Cursos", href: "/cursos" },
+      { label: "Serviços", href: "/servicos" },
+      { label: "Contacto", href: "/contacto" }
     ],
     courses: [
       { label: "Desenvolvimento Web", href: "#courses" },
@@ -84,13 +85,13 @@ const Footer = () => {
               <h4 className="text-lg font-semibold mb-4">Empresa</h4>
               <div className="space-y-3">
                 {footerLinks.company.map((link, index) => (
-                  <button
+                  <Link
                     key={index}
-                    onClick={() => scrollToSection(link.href)}
+                    to={link.href}
                     className="block text-background/80 hover:text-primary transition-colors text-sm"
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>

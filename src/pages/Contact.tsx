@@ -42,7 +42,7 @@ const Contact = () => {
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      details: "augustocamati21@gmail.com",
+      details: "academiaarc@gmail.com",
       description: "Resposta em até 24 horas"
     },
     {

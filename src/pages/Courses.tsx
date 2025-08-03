@@ -17,7 +17,7 @@ const Courses = () => {
           description: "Domínio completo de tecnologias front-end e back-end para criação de aplicações web modernas.",
           duration: "6 meses",
           level: "Intermediário",
-          students: "120+",
+          students: "Turmas limitadas",
           icon: <Code className="h-6 w-6" />,
           topics: ["HTML5/CSS3", "JavaScript", "React", "Node.js", "Bases de Dados"],
           price: "Sob consulta"
@@ -27,7 +27,7 @@ const Courses = () => {
           description: "Gestão completa de sistemas Linux empresariais, segurança e automação de processos.",
           duration: "4 meses",
           level: "Avançado",
-          students: "80+",
+          students: "Turmas limitadas",
           icon: <Server className="h-6 w-6" />,
           topics: ["Ubuntu Server", "CentOS", "Segurança", "Redes", "Automação"],
           price: "Sob consulta"
@@ -37,7 +37,7 @@ const Courses = () => {
           description: "Arduino, ESP32 e desenvolvimento de sistemas embarcados para automação industrial.",
           duration: "3 meses",
           level: "Intermediário",
-          students: "60+",
+          students: "Turmas limitadas",
           icon: <Smartphone className="h-6 w-6" />,
           topics: ["Arduino", "ESP32", "Sensores", "IoT", "Automação"],
           price: "Sob consulta"
@@ -47,7 +47,7 @@ const Courses = () => {
           description: "Design visual e experiência do utilizador para interfaces digitais modernas.",
           duration: "4 meses",
           level: "Básico",
-          students: "90+",
+          students: "Turmas limitadas",
           icon: <Palette className="h-6 w-6" />,
           topics: ["Figma", "Adobe XD", "Design Thinking", "Prototipagem", "Usabilidade"],
           price: "Sob consulta"
@@ -57,7 +57,7 @@ const Courses = () => {
           description: "Proteção de sistemas, análise de vulnerabilidades e gestão de incidentes de segurança.",
           duration: "5 meses",
           level: "Avançado",
-          students: "45+",
+          students: "Turmas limitadas",
           icon: <Shield className="h-6 w-6" />,
           topics: ["Ethical Hacking", "Forense Digital", "Redes Seguras", "Compliance", "Gestão de Riscos"],
           price: "Sob consulta"
@@ -67,7 +67,7 @@ const Courses = () => {
           description: "Estratégias digitais, otimização para motores de busca e gestão de campanhas online.",
           duration: "3 meses",
           level: "Básico",
-          students: "150+",
+          students: "Turmas limitadas",
           icon: <TrendingUp className="h-6 w-6" />,
           topics: ["Google Ads", "Facebook Ads", "SEO", "Analytics", "Content Marketing"],
           price: "Sob consulta"
@@ -75,39 +75,39 @@ const Courses = () => {
       ]
     },
     {
-      title: "Ensino Médio Técnico",
-      description: "Preparação técnica para jovens estudantes",
+      title: "Explicações Ensino Médio Técnico",
+      description: "Apoio pedagógico especializado para estudantes do ensino médio técnico",
       icon: <GraduationCap className="h-8 w-8" />,
       courses: [
         {
-          title: "Técnico em Informática",
-          description: "Formação completa em informática com foco em programação, redes e manutenção de sistemas.",
-          duration: "3 anos",
-          level: "Técnico",
-          students: "200+",
+          title: "Explicações - Curso Médio de Informática",
+          description: "Apoio pedagógico especializado nas disciplinas do curso médio técnico de informática.",
+          duration: "Flexível",
+          level: "Médio Técnico",
+          students: "Personalizado",
           icon: <Code className="h-6 w-6" />,
           topics: ["Programação", "Redes", "Hardware", "Sistemas Operacionais", "Bases de Dados"],
-          price: "Consultar valores"
+          price: "Sob consulta"
         },
         {
-          title: "Técnico em Redes de Computadores",
-          description: "Especialização em instalação, configuração e manutenção de infraestruturas de rede.",
-          duration: "3 anos",
-          level: "Técnico",
-          students: "150+",
+          title: "Explicações - Curso Médio de Electrónica e Telecomunicações",
+          description: "Explicações nas disciplinas técnicas de electrónica e sistemas de telecomunicações.",
+          duration: "Flexível",
+          level: "Médio Técnico",
+          students: "Personalizado",
           icon: <Server className="h-6 w-6" />,
-          topics: ["Cisco CCNA", "Mikrotik", "Fibra Óptica", "Wireless", "Segurança de Redes"],
-          price: "Consultar valores"
+          topics: ["Circuitos Eletrónicos", "Telecomunicações", "Sinais e Sistemas", "Automação", "Instrumentação"],
+          price: "Sob consulta"
         },
         {
-          title: "Técnico em Eletrónica",
-          description: "Desenvolvimento e manutenção de equipamentos eletrónicos e sistemas de automação.",
-          duration: "3 anos",
-          level: "Técnico",
-          students: "100+",
+          title: "Explicações - Curso Médio de Informática e Sistemas Multimédia",
+          description: "Apoio nas disciplinas de informática com foco em sistemas multimédia e design digital.",
+          duration: "Flexível",
+          level: "Médio Técnico",
+          students: "Personalizado",
           icon: <Smartphone className="h-6 w-6" />,
-          topics: ["Circuitos Eletrónicos", "Microcontroladores", "Automação", "Instrumentação", "Robótica"],
-          price: "Consultar valores"
+          topics: ["Design Gráfico", "Edição de Vídeo", "Programação Web", "Multimédia", "Interfaces Digitais"],
+          price: "Sob consulta"
         }
       ]
     }
@@ -201,7 +201,7 @@ const Courses = () => {
                       </div>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Users className="h-4 w-4" />
-                        <span>Alunos formados: {course.students}</span>
+                        <span>Modalidade: {course.students}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Award className="h-4 w-4" />

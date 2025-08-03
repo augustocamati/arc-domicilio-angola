@@ -249,40 +249,6 @@ const Services = () => {
         </section>
       ))}
 
-      {/* Portfolio Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Projetos Realizados
-              </span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Alguns dos projetos que desenvolvemos para nossos clientes.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {portfolio.map((project, index) => (
-              <Card key={index} className="p-6 border-0 bg-card/50 backdrop-blur-sm hover:shadow-card transition-all duration-300 group hover:scale-105">
-                <div className="mb-4">
-                  <Badge variant="outline" className="mb-2">{project.category}</Badge>
-                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{project.title}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
-                <div className="flex flex-wrap gap-1">
-                  {project.technologies.map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="secondary" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Process */}
       <section className="py-20">

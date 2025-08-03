@@ -7,11 +7,6 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const highlights = [
     {
-      icon: <Users className="h-8 w-8" />,
-      title: "500+ Alunos Formados",
-      description: "Profissionais capacitados em diversas áreas técnicas"
-    },
-    {
       icon: <Award className="h-8 w-8" />,
       title: "Certificação Reconhecida",
       description: "Cursos validados pelo mercado angolano"
@@ -25,18 +20,33 @@ const Home = () => {
       icon: <TrendingUp className="h-8 w-8" />,
       title: "Crescimento Sustentável",
       description: "Expandindo formação técnica em Angola"
+    },
+    {
+      icon: <Users className="h-8 w-8" />,
+      title: "3 Anos no Mercado",
+      description: "Experiência sólida em formação técnica especializada"
     }
   ];
 
   const services = [
     {
-      title: "Formação Profissional",
-      description: "Cursos técnicos especializados para o mercado de trabalho",
+      title: "Desenvolvimento Web FullStack",
+      description: "Criação de websites e aplicações web modernas",
       link: "/cursos"
     },
     {
       title: "Ensino Médio Técnico",
-      description: "Preparação completa para jovens estudantes",
+      description: "Explicações em disciplinas técnicas especializadas",
+      link: "/cursos"
+    },
+    {
+      title: "Programação Arduino & IoT",
+      description: "Automação e desenvolvimento de sistemas embarcados",
+      link: "/cursos"
+    },
+    {
+      title: "Redes de Computadores",
+      description: "Instalação, configuração e manutenção de redes",
       link: "/cursos"
     },
     {
@@ -46,7 +56,7 @@ const Home = () => {
     },
     {
       title: "Desenvolvimento de Sistemas",
-      description: "Criação de soluções digitais inovadoras",
+      description: "ERPs, CRMs e aplicações empresariais",
       link: "/servicos"
     }
   ];
@@ -97,7 +107,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {services.map((service, index) => (
               <Card key={index} className="p-6 hover:shadow-card transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm group hover:scale-105">
                 <h3 className="text-lg font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">{service.title}</h3>
@@ -117,6 +127,48 @@ const Home = () => {
                 Conheça Nossa História <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Por que escolher a Academia ARC?
+              </span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Oferecemos formação técnica de qualidade com abordagem prática e personalizada.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="p-6 text-center hover:shadow-card transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm group hover:scale-105">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                <Users className="h-8 w-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-foreground">Formação Personalizada</h3>
+              <p className="text-sm text-muted-foreground">Aulas adaptadas ao ritmo e necessidades de cada aluno</p>
+            </Card>
+
+            <Card className="p-6 text-center hover:shadow-card transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm group hover:scale-105">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                <Award className="h-8 w-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-foreground">Certificação Reconhecida</h3>
+              <p className="text-sm text-muted-foreground">Cursos validados pelo mercado de trabalho angolano</p>
+            </Card>
+
+            <Card className="p-6 text-center hover:shadow-card transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm group hover:scale-105">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                <Target className="h-8 w-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-foreground">Material Profissional</h3>
+              <p className="text-sm text-muted-foreground">Equipamentos e recursos de qualidade incluídos</p>
+            </Card>
           </div>
         </div>
       </section>

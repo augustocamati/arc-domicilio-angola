@@ -1,7 +1,7 @@
 import Hero from "@/components/Hero";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Users, Award, Target, TrendingUp } from "lucide-react";
+import { ArrowRight, Users, Award, Target, TrendingUp, Code, GraduationCap, Cpu, Network, Building, Database } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -30,40 +30,54 @@ const Home = () => {
 
   const services = [
     {
+      icon: <Code className="h-8 w-8" />,
       title: "Desenvolvimento Web FullStack",
-      description: "Criação de websites e aplicações web modernas",
+      description: "Criação de websites e aplicações web modernas com tecnologias atuais",
       link: "/cursos"
     },
     {
+      icon: <GraduationCap className="h-8 w-8" />,
       title: "Ensino Médio Técnico",
-      description: "Explicações em disciplinas técnicas especializadas",
+      description: "Explicações especializadas em Electrónica, Telecomunicações, Informática e Multimédia",
       link: "/cursos"
     },
     {
+      icon: <Cpu className="h-8 w-8" />,
       title: "Programação Arduino & IoT",
-      description: "Automação e desenvolvimento de sistemas embarcados",
+      description: "Automação e desenvolvimento de sistemas embarcados inteligentes",
       link: "/cursos"
     },
     {
+      icon: <Network className="h-8 w-8" />,
       title: "Redes de Computadores",
-      description: "Instalação, configuração e manutenção de redes",
+      description: "Instalação, configuração e manutenção de infraestruturas de rede",
       link: "/cursos"
     },
     {
+      icon: <Building className="h-8 w-8" />,
       title: "Consultoria Empresarial",
-      description: "Soluções técnicas personalizadas para empresas",
+      description: "Soluções técnicas e estratégicas personalizadas para empresas",
       link: "/servicos"
     },
     {
+      icon: <Database className="h-8 w-8" />,
       title: "Desenvolvimento de Sistemas",
-      description: "ERPs, CRMs e aplicações empresariais",
+      description: "ERPs, CRMs e aplicações empresariais sob medida",
       link: "/servicos"
     }
   ];
 
   return (
-    <div className="min-h-screen">
-      <Hero />
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-96 right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-1/4 w-64 h-64 bg-primary/3 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="relative z-10">
+        <Hero />
       
       {/* Company Overview */}
       <section className="py-20 bg-muted/30">
@@ -109,15 +123,18 @@ const Home = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {services.map((service, index) => (
-              <Card key={index} className="p-6 hover:shadow-card transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm group hover:scale-105">
-                <h3 className="text-lg font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">{service.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{service.description}</p>
-                <Link to={service.link}>
-                  <Button variant="ghost" size="sm" className="p-0 h-auto font-medium">
+              <Link key={index} to={service.link} className="group">
+                <Card className="p-6 hover:shadow-card transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm group-hover:scale-105 cursor-pointer h-full">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <div className="text-primary group-hover:scale-110 transition-transform">{service.icon}</div>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">{service.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{service.description}</p>
+                  <div className="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
                     Saiba mais <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </Card>
+                  </div>
+                </Card>
+              </Link>
             ))}
           </div>
 
@@ -197,6 +214,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 };

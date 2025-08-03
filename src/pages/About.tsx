@@ -37,29 +37,24 @@ const About = () => {
 
   const timeline = [
     {
-      year: "2020",
-      title: "Fundação da Academia ARC",
-      description: "Início das atividades focadas em formação técnica personalizada"
-    },
-    {
-      year: "2021",
-      title: "Expansão dos Serviços",
-      description: "Inclusão de consultoria empresarial e desenvolvimento de sistemas"
-    },
-    {
       year: "2022",
-      title: "Parcerias Estratégicas",
-      description: "Estabelecimento de parcerias com empresas e instituições de ensino"
+      title: "Fundação da Academia ARC",
+      description: "Início das atividades com explicações para o ensino médio técnico em Electrónica e Telecomunicações, Informática e Sistemas de Multimédia"
     },
     {
       year: "2023",
-      title: "Ensino Médio Técnico",
-      description: "Lançamento de programas específicos para jovens estudantes"
+      title: "Expansão para Cursos",
+      description: "Crescimento natural partindo para cursos técnicos especializados e formação profissional"
     },
     {
       year: "2024",
-      title: "Crescimento Sustentável",
-      description: "Consolidação como referência em formação técnica em Angola"
+      title: "Desenvolvimento Consolidado",
+      description: "Amadurecimento da oferta formativa e estabelecimento de metodologias próprias de ensino"
+    },
+    {
+      year: "2025",
+      title: "Serviços e Consultorias",
+      description: "Evolução para prestação de serviços técnicos especializados e consultorias empresariais"
     }
   ];
 

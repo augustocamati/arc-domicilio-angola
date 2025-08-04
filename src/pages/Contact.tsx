@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Users, Briefcase } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Users, Briefcase, CheckCircle, Calendar } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +23,9 @@ const Contact = () => {
     toast({
       title: "Mensagem enviada com sucesso!",
       description: "Entraremos em contacto consigo em breve.",
+      variant: "success",
+      duration: 5000,
+      
     });
     setFormData({
       name: "",
@@ -113,11 +116,73 @@ const Contact = () => {
             {/* Contact Form */}
             <div>
               <Card className="p-8 border-0 bg-card/50 backdrop-blur-sm shadow-card">
-                <h2 className="text-2xl font-bold mb-6 text-foreground">Envie-nos uma Mensagem</h2>
+                <h2 className="text-2xl font-bold mb-6 text-foreground">
+                  Envie-nos uma Mensagem
+                </h2>
+                {/* Quick Actions */}
+                <Card className="border-0 mb-8 bg-gradient-to-br from-primary/5 to-accent/5">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <MessageCircle className="h-5 w-5 text-primary" />
+                      Contacto Rápido
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start"
+                      onClick={() =>
+                        window.open(
+                          `mailto:academiaarc@gmail.com?subject=Interesse em Curso&body=Olá, tenho interesse em saber mais sobre os cursos da Academia ARC.`
+                        )
+                      }
+                    >
+                      <Mail className="h-4 w-4 mr-2" />
+                      Enviar Email
+                    </Button>
+                    <Button
+                      variant="accent"
+                      className="w-full justify-start"
+                      onClick={() =>
+                        window.open(
+                          "https://wa.me/925548028?text=Olá, tenho interesse em saber mais sobre os cursos da Academia ARC."
+                        )
+                      }
+                    >
+                      <Phone className="h-4 w-4 mr-2" />
+                      WhatsApp
+                    </Button>
+
+                    {/* Benefits */}
+                    <div>
+                      <h4 className="font-semibold mb-4 text-foreground">
+                        Por que nos contactar?
+                      </h4>
+                      <div className="space-y-3">
+                        {[
+                          "Consultoria gratuita sobre cursos",
+                          "Orçamentos personalizados",
+                          "Agendamento flexível",
+                          "Suporte técnico especializado",
+                        ].map((benefit, index) => (
+                          <div key={index} className="flex items-center gap-3">
+                            <CheckCircle className="h-5 w-5 text-accent flex-shrink-0" />
+                            <span className="text-sm text-muted-foreground">
+                              {benefit}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium text-foreground mb-2"
+                      >
                         Nome Completo *
                       </label>
                       <Input
@@ -131,7 +196,10 @@ const Contact = () => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-foreground mb-2"
+                      >
                         Email *
                       </label>
                       <Input
@@ -148,7 +216,10 @@ const Contact = () => {
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium text-foreground mb-2"
+                      >
                         Telefone
                       </label>
                       <Input
@@ -161,7 +232,10 @@ const Contact = () => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="type" className="block text-sm font-medium text-foreground mb-2">
+                      <label
+                        htmlFor="type"
+                        className="block text-sm font-medium text-foreground mb-2"
+                      >
                         Tipo de Consulta *
                       </label>
                       <select
@@ -182,7 +256,10 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="subject"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Assunto *
                     </label>
                     <Input
@@ -197,7 +274,10 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Mensagem *
                     </label>
                     <Textarea
@@ -212,7 +292,11 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full hover:scale-105 transition-transform">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full hover:scale-105 transition-transform"
+                  >
                     <Send className="mr-2 h-5 w-5" />
                     Enviar Mensagem
                   </Button>
@@ -223,18 +307,29 @@ const Contact = () => {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-2xl font-bold mb-6 text-foreground">Informações de Contacto</h2>
+                <h2 className="text-2xl font-bold mb-6 text-foreground">
+                  Informações de Contacto
+                </h2>
                 <div className="grid gap-6">
                   {contactInfo.map((info, index) => (
-                    <Card key={index} className="p-6 border-0 bg-card/50 backdrop-blur-sm hover:shadow-card transition-all duration-300 group hover:scale-105">
+                    <Card
+                      key={index}
+                      className="p-6 border-0 bg-card/50 backdrop-blur-sm hover:shadow-card transition-all duration-300 group hover:scale-105"
+                    >
                       <div className="flex items-start gap-4">
                         <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                           <div className="text-primary">{info.icon}</div>
                         </div>
                         <div>
-                          <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{info.title}</h3>
-                          <p className="text-foreground font-medium">{info.details}</p>
-                          <p className="text-sm text-muted-foreground">{info.description}</p>
+                          <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {info.title}
+                          </h3>
+                          <p className="text-foreground font-medium">
+                            {info.details}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {info.description}
+                          </p>
                         </div>
                       </div>
                     </Card>
@@ -244,10 +339,15 @@ const Contact = () => {
 
               {/* Service Types */}
               <div>
-                <h3 className="text-xl font-bold mb-4 text-foreground">Como Podemos Ajudar?</h3>
+                <h3 className="text-xl font-bold mb-4 text-foreground">
+                  Como Podemos Ajudar?
+                </h3>
                 <div className="space-y-3">
                   {serviceTypes.map((type, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-card/30 hover:bg-card/50 transition-colors">
+                    <div
+                      key={index}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-card/30 hover:bg-card/50 transition-colors"
+                    >
                       <div className="text-primary">{type.icon}</div>
                       <span className="text-foreground">{type.label}</span>
                     </div>
@@ -275,7 +375,10 @@ const Contact = () => {
 
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
             {faqs.map((faq, index) => (
-              <Card key={index} className="p-6 border-0 bg-card/50 backdrop-blur-sm hover:shadow-card transition-all duration-300 group hover:scale-105">
+              <Card
+                key={index}
+                className="p-6 border-0 bg-card/50 backdrop-blur-sm hover:shadow-card transition-all duration-300 group hover:scale-105"
+              >
                 <h3 className="text-lg font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
                   {faq.question}
                 </h3>
@@ -295,23 +398,30 @@ const Contact = () => {
             Ainda tem Dúvidas?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            A nossa equipa está sempre disponível para esclarecer qualquer questão 
-            e ajudar a encontrar a melhor solução para suas necessidades.
+            A nossa equipa está sempre disponível para esclarecer qualquer
+            questão e ajudar a encontrar a melhor solução para suas
+            necessidades.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="secondary" size="lg" className="hover:scale-105 transition-transform">
+            
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/925548028?text=Olá, tenho interesse em saber mais sobre os cursos da Academia ARC."
+                )
+              }
+            >
               <Phone className="mr-2 h-5 w-5" />
-              Ligar Agora
-            </Button>
-            <Button variant="outline" size="lg" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
-              <Mail className="mr-2 h-5 w-5" />
-              Enviar Email
+              peprgunte no Whatsapp
             </Button>
           </div>
         </div>
       </section>
     </div>
-  );
+  )
 };
 
 export default Contact;

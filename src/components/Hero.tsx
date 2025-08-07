@@ -113,8 +113,8 @@ const Hero = () => {
                   <Users className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold text-foreground">Augusto Camati</div>
-                  <div className="text-sm text-muted-foreground">Fundador & Instrutor Principal</div>
+                  <div className="font-semibold text-foreground">Formação Técnica</div>
+                  <div className="text-sm text-muted-foreground">Excelência em Educação</div>
                 </div>
               </div>
             </div>

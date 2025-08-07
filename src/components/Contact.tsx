@@ -30,7 +30,7 @@ const Contact = () => {
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      content: "augustocamati21@gmail.com",
+      content: "academiaarc@gmail.com",
       description: "Resposta em até 24h"
     },
     {

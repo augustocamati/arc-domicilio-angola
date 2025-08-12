@@ -1,239 +1,273 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Cpu, 
-  Radio, 
-  Monitor, 
-  Camera,
-  Clock,
-  Users,
-  BookOpen,
-  Target
-} from "lucide-react";
+import { Clock, Users, Award, BookOpen, Code, Server, Smartphone, Palette, Shield, TrendingUp, GraduationCap, Briefcase } from "lucide-react";
+import webDevImage from "@/assets/web-development.jpg";
+import { Link } from "react-router-dom";
 
 const Courses = () => {
-  const courses = [
+  const courseCategories = [
     {
-      icon: <Cpu className="h-8 w-8 text-primary" />,
-      title: "Electrónica e Telecomunicações",
-      description: "Explicações especializadas para disciplinas do ensino médio técnico em electrónica e telecomunicações.",
-      subjects: [
-        "Circuitos Electrónicos",
-        "Sistemas de Telecomunicações", 
-        "Análise de Circuitos",
-        "Electrónica Digital",
-        "Processamento de Sinais"
-      ],
-      duration: "Flexible",
-      level: "Ensino Médio",
-      category: "Explicações"
+      title: "Formação Profissional",
+      description: "Cursos técnicos especializados para profissionais",
+      icon: <Briefcase className="h-8 w-8" />,
+      courses: [
+        {
+          title: "Desenvolvimento Web FullStack",
+          description: "Domínio completo de tecnologias front-end e back-end para criação de aplicações web modernas.",
+          duration: "6 meses",
+          level: "Intermediário",
+          students: "Turmas limitadas",
+          icon: <Code className="h-6 w-6" />,
+          topics: ["HTML5/CSS3", "JavaScript", "React", "Node.js", "Bases de Dados"],
+          price: "Sob consulta"
+        },
+        {
+          title: "Administração de Servidores Linux",
+          description: "Gestão completa de sistemas Linux empresariais, segurança e automação de processos.",
+          duration: "4 meses",
+          level: "Avançado",
+          students: "Turmas limitadas",
+          icon: <Server className="h-6 w-6" />,
+          topics: ["Ubuntu Server", "CentOS", "Segurança", "Redes", "Automação"],
+          price: "Sob consulta"
+        },
+        {
+          title: "Programação de Microcontroladores",
+          description: "Arduino, ESP32 e desenvolvimento de sistemas embarcados para automação industrial.",
+          duration: "3 meses",
+          level: "Intermediário",
+          students: "Turmas limitadas",
+          icon: <Smartphone className="h-6 w-6" />,
+          topics: ["Arduino", "ESP32", "Sensores", "IoT", "Automação"],
+          price: "Sob consulta"
+        },
+        {
+          title: "Web Design & UX/UI",
+          description: "Design visual e experiência do utilizador para interfaces digitais modernas.",
+          duration: "4 meses",
+          level: "Básico",
+          students: "Turmas limitadas",
+          icon: <Palette className="h-6 w-6" />,
+          topics: ["Figma", "Adobe XD", "Design Thinking", "Prototipagem", "Usabilidade"],
+          price: "Sob consulta"
+        },
+        {
+          title: "Cibersegurança",
+          description: "Proteção de sistemas, análise de vulnerabilidades e gestão de incidentes de segurança.",
+          duration: "5 meses",
+          level: "Avançado",
+          students: "Turmas limitadas",
+          icon: <Shield className="h-6 w-6" />,
+          topics: ["Ethical Hacking", "Forense Digital", "Redes Seguras", "Compliance", "Gestão de Riscos"],
+          price: "Sob consulta"
+        },
+        {
+          title: "Marketing Digital & SEO",
+          description: "Estratégias digitais, otimização para motores de busca e gestão de campanhas online.",
+          duration: "3 meses",
+          level: "Básico",
+          students: "Turmas limitadas",
+          icon: <TrendingUp className="h-6 w-6" />,
+          topics: ["Google Ads", "Facebook Ads", "SEO", "Analytics", "Content Marketing"],
+          price: "Sob consulta"
+        }
+      ]
     },
     {
-      icon: <Monitor className="h-8 w-8 text-primary" />,
-      title: "Informática",
-      description: "Suporte completo nas disciplinas de informática do ensino médio técnico.",
-      subjects: [
-        "Programação Básica",
-        "Sistemas Operativos",
-        "Redes de Computadores",
-        "Base de Dados",
-        "Arquitectura de Computadores"
-      ],
-      duration: "Flexible",
-      level: "Ensino Médio", 
-      category: "Explicações"
-    },
-    {
-      icon: <Camera className="h-8 w-8 text-primary" />,
-      title: "Sistemas Multimédia",
-      description: "Explicações focadas nas disciplinas técnicas de sistemas multimédia.",
-      subjects: [
-        "Design Gráfico",
-        "Edição de Vídeo",
-        "Animação Digital",
-        "Produção Audiovisual",
-        "Tecnologias Web"
-      ],
-      duration: "Flexible",
-      level: "Ensino Médio",
-      category: "Explicações"
+      title: "Explicações Ensino Médio Técnico",
+      description: "Apoio pedagógico especializado para estudantes do ensino médio técnico",
+      icon: <GraduationCap className="h-8 w-8" />,
+      courses: [
+        {
+          title: "Explicações - Curso Médio de Informática",
+          description: "Apoio pedagógico especializado nas disciplinas do curso médio técnico de informática.",
+          duration: "Flexível",
+          level: "Médio Técnico",
+          students: "Personalizado",
+          icon: <Code className="h-6 w-6" />,
+          topics: ["Programação", "Redes", "Hardware", "Sistemas Operacionais", "Bases de Dados"],
+          price: "Sob consulta"
+        },
+        {
+          title: "Explicações - Curso Médio de Electrónica e Telecomunicações",
+          description: "Explicações nas disciplinas técnicas de electrónica e sistemas de telecomunicações.",
+          duration: "Flexível",
+          level: "Médio Técnico",
+          students: "Personalizado",
+          icon: <Server className="h-6 w-6" />,
+          topics: ["Circuitos Eletrónicos", "Telecomunicações", "Sinais e Sistemas", "Automação", "Instrumentação"],
+          price: "Sob consulta"
+        },
+        {
+          title: "Explicações - Curso Médio de Informática e Sistemas Multimédia",
+          description: "Apoio nas disciplinas de informática com foco em sistemas multimédia e design digital.",
+          duration: "Flexível",
+          level: "Médio Técnico",
+          students: "Personalizado",
+          icon: <Smartphone className="h-6 w-6" />,
+          topics: ["Design Gráfico", "Edição de Vídeo", "Programação Web", "Multimédia", "Interfaces Digitais"],
+          price: "Sob consulta"
+        }
+      ]
     }
   ];
 
-  const scrollToContact = () => {
-    const element = document.querySelector("#contact");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const features = [
+    "Material didático actualizado incluído",
+    "Certificação reconhecida pelo mercado",
+    "Suporte técnico durante todo o curso",
+    "Aulas práticas com equipamentos profissionais",
+    "Flexibilidade de horários",
+    "Orientação para inserção no mercado de trabalho"
+  ];
 
   return (
-    <div className="min-h-screen">
-      <Header />
-      
+    <div className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-to-r from-primary/10 via-background to-accent/10">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl font-bold text-foreground mb-6">
-              Explicações Especializadas
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Suporte personalizado nas disciplinas técnicas do ensino médio
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Badge variant="secondary" className="px-4 py-2">
-                <BookOpen className="h-4 w-4 mr-2" />
-                Ensino Médio Técnico
-              </Badge>
-              <Badge variant="secondary" className="px-4 py-2">
-                <Target className="h-4 w-4 mr-2" />
-                Explicações Personalizadas
-              </Badge>
-              <Badge variant="secondary" className="px-4 py-2">
-                <Users className="h-4 w-4 mr-2" />
-                Apoio Individual
-              </Badge>
+      <section className="py-20 bg-gradient-to-r from-primary to-accent text-primary-foreground">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+                Cursos & Formações
+              </h1>
+              <p className="text-xl lg:text-2xl mb-8 opacity-90">
+                Invista no seu futuro profissional com os nossos cursos técnicos especializados, 
+                desde formação profissional até ensino médio técnico.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/contacto">
+                  <Button variant="secondary" size="lg" className="hover:scale-105 transition-transform">
+                    Inscrever-se Agora
+                  </Button>
+                </Link>
+                <Button variant="outline" size="lg" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
+                  Ver Calendário
+                </Button>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden shadow-card">
+                <img 
+                  src={webDevImage} 
+                  alt="Formação técnica - Academia ARC"
+                  className="w-full h-[400px] object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Courses Grid */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
+      {/* Course Categories */}
+      {courseCategories.map((category, categoryIndex) => (
+        <section key={categoryIndex} className={`py-20 ${categoryIndex % 2 === 0 ? 'bg-muted/30' : ''}`}>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="text-primary">{category.icon}</div>
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  {category.title}
+                </span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                {category.description}
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {category.courses.map((course, index) => (
+                <Card key={index} className="overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:shadow-card transition-all duration-300 group hover:scale-105">
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <div className="text-primary">{course.icon}</div>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{course.title}</h3>
+                        <Badge variant="secondary">{course.level}</Badge>
+                      </div>
+                    </div>
+
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{course.description}</p>
+
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Clock className="h-4 w-4" />
+                        <span>Duração: {course.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Users className="h-4 w-4" />
+                        <span>Modalidade: {course.students}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Award className="h-4 w-4" />
+                        <span>Preço: {course.price}</span>
+                      </div>
+                    </div>
+
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold mb-2 text-foreground">Tópicos principais:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {course.topics.map((topic, topicIndex) => (
+                          <Badge key={topicIndex} variant="outline" className="text-xs">
+                            {topic}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <Link to="/contacto" className="flex-1">
+                        <Button className="w-full hover:scale-105 transition-transform">
+                          Inscrever-se
+                        </Button>
+                      </Link>
+                      <Button variant="outline" size="icon" className="hover:scale-105 transition-transform">
+                        <BookOpen className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* Features */}
+      <section className="py-20 bg-gradient-to-r from-primary to-accent text-primary-foreground">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Áreas de Especialização
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+              Por que escolher nossos cursos?
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Oferecemos explicações especializadas nas principais disciplinas técnicas
+            <p className="text-xl max-w-3xl mx-auto opacity-90">
+              Oferecemos uma experiência de aprendizagem completa e personalizada.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {courses.map((course, index) => (
-              <Card key={index} className="border-border/50 hover:shadow-lg transition-all duration-300 hover:border-primary/20">
-                <CardHeader className="text-center pb-4">
-                  <div className="flex justify-center mb-4">
-                    {course.icon}
-                  </div>
-                  <CardTitle className="text-xl text-foreground mb-2">
-                    {course.title}
-                  </CardTitle>
-                  <Badge variant="outline" className="w-fit mx-auto">
-                    {course.category}
-                  </Badge>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-muted-foreground text-center">
-                    {course.description}
-                  </p>
-
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">
-                        Disciplinas Abordadas:
-                      </h4>
-                      <ul className="space-y-1">
-                        {course.subjects.map((subject, idx) => (
-                          <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
-                            <div className="w-1 h-1 bg-primary rounded-full"></div>
-                            {subject}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="flex justify-between items-center pt-4 border-t border-border/50">
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm text-muted-foreground">{course.duration}</span>
-                      </div>
-                      <Badge variant="secondary">
-                        {course.level}
-                      </Badge>
-                    </div>
-                  </div>
-
-                  <Button 
-                    className="w-full" 
-                    onClick={scrollToContact}
-                  >
-                    Solicitar Explicações
-                  </Button>
-                </CardContent>
-              </Card>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-center gap-3 p-4 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 group">
+                <Award className="h-5 w-5 text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="text-sm opacity-90 group-hover:opacity-100 transition-opacity">{feature}</span>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-secondary/20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Por que escolher nossas explicações?
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center space-y-4">
-              <div className="flex justify-center">
-                <Target className="h-12 w-12 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground">
-                Foco Personalizado
-              </h3>
-              <p className="text-muted-foreground">
-                Explicações adaptadas às necessidades específicas de cada aluno
-              </p>
-            </div>
-
-            <div className="text-center space-y-4">
-              <div className="flex justify-center">
-                <BookOpen className="h-12 w-12 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground">
-                Metodologia Eficaz
-              </h3>
-              <p className="text-muted-foreground">
-                Métodos de ensino comprovados e adaptados ao currículo angolano
-              </p>
-            </div>
-
-            <div className="text-center space-y-4">
-              <div className="flex justify-center">
-                <Users className="h-12 w-12 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground">
-                Professores Qualificados
-              </h3>
-              <p className="text-muted-foreground">
-                Equipa de professores especializados nas áreas técnicas
-              </p>
-            </div>
-
-            <div className="text-center space-y-4">
-              <div className="flex justify-center">
-                <Clock className="h-12 w-12 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground">
-                Horários Flexíveis
-              </h3>
-              <p className="text-muted-foreground">
-                Adaptamos os horários às necessidades dos alunos
-              </p>
-            </div>
+          <div className="text-center mt-12">
+            <Link to="/contacto">
+              <Button variant="secondary" size="lg" className="hover:scale-105 transition-transform">
+                Comece Hoje Mesmo
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

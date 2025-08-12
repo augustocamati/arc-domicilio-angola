@@ -1,21 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
 
   const navItems = [
     { label: "Início", href: "/" },
     { label: "Sobre", href: "/sobre" },
     { label: "Cursos", href: "/cursos" },
     { label: "Serviços", href: "/servicos" },
+    { label: "Conteúdos", href: "/conteudos" },
     { label: "Contacto", href: "/contacto" },
   ];
 
-  const isActive = (href: string) => location.pathname === href;
+  const handleNavigation = (href: string) => {
+    if (href.startsWith('/')) {
+      window.location.href = href;
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
@@ -31,30 +40,29 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.label}
-                to={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className={`text-foreground hover:text-primary transition-colors duration-300 ${
-                  isActive(item.href) ? 'text-primary font-semibold' : ''
-                }`}
+                onClick={() => handleNavigation(item.href)}
+                className="text-foreground hover:text-primary transition-colors duration-300"
               >
                 {item.label}
-              </Link>
+              </button>
             ))}
           </nav>
 
-          {/* CTA */}
+          {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Link to="/contacto">
-              <Button 
-                variant="hero" 
-                size="sm"
-                className="hover:scale-105 transition-transform"
-              >
-                Entrar em Contacto
-              </Button>
-            </Link>
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <Mail className="h-4 w-4" />
+              <span>academiaarc@gmail.com</span>
+            </div>
+            <Button 
+              variant="hero" 
+              size="sm"
+              onClick={() => handleNavigation("/contacto")}
+            >
+              Marcar Aula
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -74,27 +82,22 @@ const Header = () => {
           <div className="md:hidden py-4 border-t border-border">
             <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
-                <Link
+                <button
                   key={item.label}
-                  to={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`text-left text-foreground hover:text-primary transition-colors duration-300 ${
-                    isActive(item.href) ? 'text-primary font-semibold' : ''
-                  }`}
+                  onClick={() => handleNavigation(item.href)}
+                  className="text-left text-foreground hover:text-primary transition-colors duration-300"
                 >
                   {item.label}
-                </Link>
+                </button>
               ))}
               <div className="pt-4 border-t border-border">
-                <Link to="/contacto">
-                  <Button 
-                    variant="hero" 
-                    className="w-full hover:scale-105 transition-transform"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Entrar em Contacto
-                  </Button>
-                </Link>
+                <Button 
+                  variant="hero" 
+                  className="w-full"
+                  onClick={() => handleNavigation("/contacto")}
+                >
+                  Marcar Aula
+                </Button>
               </div>
             </nav>
           </div>

@@ -140,7 +140,7 @@ const Contact = () => {
                 <Button 
                   variant="outline" 
                   className="w-full justify-start"
-                  onClick={() => window.open(`mailto:academiaarc@gmail.com?subject=Interesse em Curso&body=Olá, tenho interesse em saber mais sobre os cursos da Academia ARC.`)}
+                  onClick={() => window.open(`mailto:augustocamati21@gmail.com?subject=Interesse em Curso&body=Olá, tenho interesse em saber mais sobre os cursos da Academia ARC.`)}
                 >
                   <Mail className="h-4 w-4 mr-2" />
                   Enviar Email

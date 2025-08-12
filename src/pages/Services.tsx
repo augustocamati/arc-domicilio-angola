@@ -303,6 +303,7 @@ const Services = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

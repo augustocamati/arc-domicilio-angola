@@ -6,17 +6,22 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "Início", href: "#home" },
-    { label: "Sobre", href: "#about" },
-    { label: "Cursos", href: "#courses" },
-    { label: "Serviços", href: "#services" },
-    { label: "Contacto", href: "#contact" },
+    { label: "Início", href: "/" },
+    { label: "Sobre", href: "/sobre" },
+    { label: "Cursos", href: "/cursos" },
+    { label: "Serviços", href: "/servicos" },
+    { label: "Conteúdos", href: "/conteudos" },
+    { label: "Contacto", href: "/contacto" },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const handleNavigation = (href: string) => {
+    if (href.startsWith('/')) {
+      window.location.href = href;
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
     setIsMenuOpen(false);
   };
@@ -37,7 +42,7 @@ const Header = () => {
             {navItems.map((item) => (
               <button
                 key={item.label}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleNavigation(item.href)}
                 className="text-foreground hover:text-primary transition-colors duration-300"
               >
                 {item.label}
@@ -54,7 +59,7 @@ const Header = () => {
             <Button 
               variant="hero" 
               size="sm"
-              onClick={() => scrollToSection("#contact")}
+              onClick={() => handleNavigation("/contacto")}
             >
               Marcar Aula
             </Button>
@@ -79,7 +84,7 @@ const Header = () => {
               {navItems.map((item) => (
                 <button
                   key={item.label}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => handleNavigation(item.href)}
                   className="text-left text-foreground hover:text-primary transition-colors duration-300"
                 >
                   {item.label}
@@ -89,7 +94,7 @@ const Header = () => {
                 <Button 
                   variant="hero" 
                   className="w-full"
-                  onClick={() => scrollToSection("#contact")}
+                  onClick={() => handleNavigation("/contacto")}
                 >
                   Marcar Aula
                 </Button>

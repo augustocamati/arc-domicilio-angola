@@ -23,9 +23,7 @@ const Contact = () => {
     toast({
       title: "Mensagem enviada com sucesso!",
       description: "Entraremos em contacto consigo em breve.",
-      variant: "success",
       duration: 5000,
-      
     });
     setFormData({
       name: "",

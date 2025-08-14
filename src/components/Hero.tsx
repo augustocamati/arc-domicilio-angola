@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Home, Users } from "lucide-react";
+import EnrollmentForm from "@/components/EnrollmentForm";
 import heroImage from "@/assets/hero-academy.jpg";
 
 const Hero = () => {
@@ -68,14 +69,7 @@ const Hero = () => {
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={() => scrollToSection("#contact")}
-              >
-                <BookOpen className="h-5 w-5" />
-                Marcar Explicação
-              </Button>
+              <EnrollmentForm />
             </div>
 
             {/* Features */}

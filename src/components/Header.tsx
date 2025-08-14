@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button"
 import { Menu, X, Phone, Mail } from "lucide-react"
 import { useState } from "react"
+import EnrollmentForm from "./EnrollmentForm"
+import { APP_CONFIG } from "@/config/environment"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false)
 
   const navItems = [
     { label: "Início", href: "/" },
@@ -53,14 +56,14 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
               <Mail className="h-4 w-4" />
-              <span>academiaarc@gmail.com</span>
+              <span>{APP_CONFIG.academy.email}</span>
             </div>
             <Button
               variant="hero"
               size="sm"
-              onClick={() => handleNavigation("/contacto")}
+              onClick={() => setIsEnrollmentOpen(true)}
             >
-              Marcar Aula
+              Marcar Explicação
             </Button>
           </div>
 
@@ -97,15 +100,24 @@ const Header = () => {
                 <Button
                   variant="hero"
                   className="w-full"
-                  onClick={() => handleNavigation("/contacto")}
+                  onClick={() => {
+                    setIsEnrollmentOpen(true)
+                    setIsMenuOpen(false)
+                  }}
                 >
-                  Marcar Aula
+                  Marcar Explicação
                 </Button>
               </div>
             </nav>
           </div>
         )}
       </div>
+      
+      {/* Enrollment Form Dialog */}
+      <EnrollmentForm 
+        open={isEnrollmentOpen} 
+        onOpenChange={setIsEnrollmentOpen} 
+      />
     </header>
   )
 }

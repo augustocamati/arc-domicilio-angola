@@ -12,6 +12,7 @@ import {
   Smartphone,
   Database
 } from "lucide-react";
+import { generateBudgetWhatsAppLink } from "@/config/environment";
 
 const Services = () => {
   const services = [
@@ -75,6 +76,10 @@ const Services = () => {
     }
   };
 
+  const handleBudgetRequest = () => {
+    window.open(generateBudgetWhatsAppLink(), '_blank');
+  };
+
   return (
     <section id="services" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -126,7 +131,7 @@ const Services = () => {
                   variant="outline" 
                   size="sm" 
                   className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground"
-                  onClick={scrollToContact}
+                  onClick={handleBudgetRequest}
                 >
                   Solicitar Orçamento
                 </Button>
@@ -170,7 +175,7 @@ const Services = () => {
               Entre em contacto para discutir como podemos ajudar.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg" onClick={scrollToContact}>
+              <Button variant="hero" size="lg" onClick={handleBudgetRequest}>
                 Solicitar Consultoria Gratuita
               </Button>
               <Button variant="outline" size="lg" onClick={scrollToContact}>

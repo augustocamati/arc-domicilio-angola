@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,7 +8,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { BookOpen, User, GraduationCap, Calendar, Clock, CheckCircle2 } from "lucide-react";
+import { BookOpen, User, GraduationCap, Calendar, Clock, CheckCircle2, Upload, FileText } from "lucide-react";
+import { APP_CONFIG } from "@/config/environment";
 
 interface EnrollmentData {
   // Dados Pessoais (BI Angolano)
@@ -23,6 +24,7 @@ interface EnrollmentData {
   email: string;
   parentName: string; // Para menores
   parentPhone: string; // Para menores
+  idDocument: File | null; // Bilhete de Identidade PDF
   
   // Dados Escolares
   currentGrade: string;
@@ -35,10 +37,21 @@ interface EnrollmentData {
   additionalInfo: string;
 }
 
-const EnrollmentForm = () => {
+interface EnrollmentFormProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+const EnrollmentForm = ({ open, onOpenChange }: EnrollmentFormProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(1);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
+
+  // Use props if provided, otherwise use internal state
+  const dialogOpen = open !== undefined ? open : isOpen;
+  const setDialogOpen = onOpenChange || setIsOpen;
   
   const [formData, setFormData] = useState<EnrollmentData>({
     fullName: "",
@@ -52,6 +65,7 @@ const EnrollmentForm = () => {
     email: "",
     parentName: "",
     parentPhone: "",
+    idDocument: null,
     currentGrade: "",
     currentCourse: "",
     school: "",
@@ -61,6 +75,38 @@ const EnrollmentForm = () => {
     startDate: "",
     additionalInfo: ""
   });
+
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      // Verificar tipo de arquivo
+      if (file.type !== "application/pdf") {
+        toast({
+          title: "Tipo de arquivo inválido",
+          description: "Por favor, selecione apenas arquivos PDF.",
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      // Verificar tamanho do arquivo (5MB max)
+      if (file.size > APP_CONFIG.system.fileUpload.maxSize) {
+        toast({
+          title: "Arquivo muito grande",
+          description: "O arquivo deve ter no máximo 5MB.",
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      setSelectedFile(file);
+      setFormData(prev => ({ ...prev, idDocument: file }));
+      toast({
+        title: "Arquivo carregado",
+        description: `${file.name} foi carregado com sucesso.`
+      });
+    }
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -85,8 +131,9 @@ const EnrollmentForm = () => {
       duration: 5000,
     });
     
-    setIsOpen(false);
+    setDialogOpen(false);
     setStep(1);
+    setSelectedFile(null);
     setFormData({
       fullName: "",
       biNumber: "",
@@ -99,6 +146,7 @@ const EnrollmentForm = () => {
       email: "",
       parentName: "",
       parentPhone: "",
+      idDocument: null,
       currentGrade: "",
       currentCourse: "",
       school: "",
@@ -143,13 +191,15 @@ const EnrollmentForm = () => {
   ];
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" size="lg">
-          <BookOpen className="h-5 w-5" />
-          Marcar Explicação
-        </Button>
-      </DialogTrigger>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      {!open && (
+        <DialogTrigger asChild>
+          <Button variant="outline" size="lg">
+            <BookOpen className="h-5 w-5" />
+            Marcar Explicação
+          </Button>
+        </DialogTrigger>
+      )}
       
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
@@ -296,6 +346,61 @@ const EnrollmentForm = () => {
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                {/* Upload do Bilhete de Identidade */}
+                <div className="space-y-2">
+                  <Label htmlFor="idDocument">Bilhete de Identidade (PDF) *</Label>
+                  <div className="border-2 border-dashed border-border rounded-lg p-6">
+                    <div className="text-center">
+                      {selectedFile ? (
+                        <div className="space-y-2">
+                          <FileText className="h-8 w-8 text-success mx-auto" />
+                          <p className="text-sm font-medium text-foreground">{selectedFile.name}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                          </p>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setSelectedFile(null);
+                              setFormData(prev => ({ ...prev, idDocument: null }));
+                              if (fileInputRef.current) {
+                                fileInputRef.current.value = "";
+                              }
+                            }}
+                          >
+                            Remover arquivo
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          <Upload className="h-8 w-8 text-muted-foreground mx-auto" />
+                          <div>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              onClick={() => fileInputRef.current?.click()}
+                            >
+                              Selecionar arquivo PDF
+                            </Button>
+                            <p className="text-xs text-muted-foreground mt-2">
+                              Máximo 5MB • Apenas PDF
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept=".pdf"
+                      onChange={handleFileSelect}
+                      className="hidden"
                     />
                   </div>
                 </div>

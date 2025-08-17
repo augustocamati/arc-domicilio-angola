@@ -87,7 +87,8 @@ export const APP_CONFIG = {
         level: "Médio Técnico",
         topics: ["Programação", "Redes", "Hardware", "Sistemas Operacionais", "Bases de Dados"],
         category: "explicacao",
-        icon: "Code"
+        icon: "Code",
+        popular: false
       },
       {
         title: "Explicações - Curso Médio de Electrónica",
@@ -96,7 +97,8 @@ export const APP_CONFIG = {
         level: "Médio Técnico",
         topics: ["Circuitos Eletrónicos", "Telecomunicações", "Sinais e Sistemas", "Automação", "Instrumentação"],
         category: "explicacao",
-        icon: "Server"
+        icon: "Server",
+        popular: false
       }
     ]
   },

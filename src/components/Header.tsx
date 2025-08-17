@@ -8,13 +8,6 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false)
 
-  const navItems = [
-    { label: "Início", href: "/" },
-    { label: "Sobre", href: "/sobre" },
-    { label: "Cursos", href: "/cursos" },
-    { label: "Serviços", href: "/servicos" },
-    { label: "Contacto", href: "/contacto" },
-  ]
 
   const handleNavigation = (href: string) => {
     if (href.startsWith("/")) {
@@ -41,7 +34,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {APP_CONFIG.urls.links.map((item) => (
               <button
                 key={item.label}
                 onClick={() => handleNavigation(item.href)}
@@ -87,7 +80,7 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border">
             <nav className="flex flex-col space-y-4">
-              {navItems.map((item) => (
+              {APP_CONFIG.urls.links.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => handleNavigation(item.href)}
@@ -112,11 +105,11 @@ const Header = () => {
           </div>
         )}
       </div>
-      
+
       {/* Enrollment Form Dialog */}
-      <EnrollmentForm 
-        open={isEnrollmentOpen} 
-        onOpenChange={setIsEnrollmentOpen} 
+      <EnrollmentForm
+        open={isEnrollmentOpen}
+        onOpenChange={setIsEnrollmentOpen}
       />
     </header>
   )

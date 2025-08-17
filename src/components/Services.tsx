@@ -76,8 +76,8 @@ const Services = () => {
     }
   };
 
-  const handleBudgetRequest = () => {
-    window.open(generateBudgetWhatsAppLink(), '_blank');
+  const handleBudgetRequest = (title: string = "") => {
+    window.open(generateBudgetWhatsAppLink(title), '_blank');
   };
 
   return (
@@ -131,7 +131,7 @@ const Services = () => {
                   variant="outline" 
                   size="sm" 
                   className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground"
-                  onClick={handleBudgetRequest}
+                  onClick={() => handleBudgetRequest(service.title)}
                 >
                   Solicitar Orçamento
                 </Button>
@@ -175,7 +175,7 @@ const Services = () => {
               Entre em contacto para discutir como podemos ajudar.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg" onClick={handleBudgetRequest}>
+              <Button variant="hero" size="lg" onClick={() => handleBudgetRequest("Consultoria Gratuita")}>
                 Solicitar Consultoria Gratuita
               </Button>
               <Button variant="outline" size="lg" onClick={scrollToContact}>

@@ -3,6 +3,8 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { APP_CONFIG } from "@/config/environment"
+
 import {
   Code,
   Server,

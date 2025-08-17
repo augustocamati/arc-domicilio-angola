@@ -10,6 +10,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { BookOpen, User, GraduationCap, Calendar, Clock, CheckCircle2, Upload, FileText } from "lucide-react";
 import { APP_CONFIG } from "@/config/environment";
+import { generateWhatsAppLink } from "@/config/environment"
+
 
 interface EnrollmentData {
   // Dados Pessoais (BI Angolano)
@@ -123,6 +125,31 @@ const EnrollmentForm = ({ open, onOpenChange }: EnrollmentFormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    //envio para o whatsapp
+    const message = `Olá Academia ARC, gostaria de me inscrever no curso com os seguintes dados:
+    Nome: ${formData.fullName}
+    BI: ${formData.biNumber}
+    Data de Nascimento: ${formData.birthDate}
+    Local de Nascimento: ${formData.birthPlace}
+    Província: ${formData.province}
+    Município: ${formData.municipality}
+    Endereço: ${formData.address}
+    Telefone: ${formData.phone}
+    Email: ${formData.email}
+    Nome do Responsável: ${formData.parentName}
+    Telefone do Responsável: ${formData.parentPhone}
+    Ano/Classe Atual: ${formData.currentGrade}
+    Curso Atual: ${formData.currentCourse}
+    Escola: ${formData.school}
+    Disciplinas de Interesse: ${formData.subjects.join(", ")}
+    Horário Preferido: ${formData.preferredSchedule}
+    Duração: ${formData.duration}
+    Data de Início: ${formData.startDate}
+    Informações Adicionais: ${formData.additionalInfo}`;
+    const whatsappUrl = `${APP_CONFIG.whatsapp.baseUrl}/${APP_CONFIG.academy.whatsapp}?text=${encodeURIComponent(message)}`;
+    window.open(generateWhatsAppLink(message), "_blank")
+
     
     // Simular envio do formulário
     toast({
@@ -192,14 +219,7 @@ const EnrollmentForm = ({ open, onOpenChange }: EnrollmentFormProps) => {
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-      {!open && (
-        <DialogTrigger asChild>
-          <Button variant="outline" size="lg">
-            <BookOpen className="h-5 w-5" />
-            Marcar Explicação
-          </Button>
-        </DialogTrigger>
-      )}
+   
       
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>

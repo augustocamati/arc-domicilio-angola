@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { APP_CONFIG } from "@/config/environment"
+
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Users, Briefcase, CheckCircle, Calendar } from "lucide-react";
 
 const Contact = () => {
@@ -43,19 +45,19 @@ const Contact = () => {
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      details: "academiaarc@gmail.com",
+      details: APP_CONFIG.academy.email,
       description: "Resposta em até 24 horas"
     },
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Telefone",
-      details: "+244 XXX XXX XXX",
+      details: APP_CONFIG.academy.phone,
       description: "Segunda a Sexta, 8h às 18h"
     },
     {
       icon: <MapPin className="h-6 w-6" />,
       title: "Localização",
-      details: "Luanda, Angola",
+      details: APP_CONFIG.academy.address,
       description: "Atendimento em toda a província"
     },
     {
@@ -101,8 +103,8 @@ const Contact = () => {
             Entre em Contacto
           </h1>
           <p className="text-xl lg:text-2xl max-w-4xl mx-auto mb-8 opacity-90">
-            Estamos prontos para ajudar no seu crescimento profissional ou no desenvolvimento 
-            de soluções tecnológicas para sua empresa.
+            Estamos prontos para ajudar no seu crescimento profissional ou no
+            desenvolvimento de soluções tecnológicas para sua empresa.
           </p>
         </div>
       </section>
@@ -131,7 +133,7 @@ const Contact = () => {
                       className="w-full justify-start"
                       onClick={() =>
                         window.open(
-                          `mailto:academiaarc@gmail.com?subject=Interesse em Curso&body=Olá, tenho interesse em saber mais sobre os cursos da Academia ARC.`
+                          `mailto:${APP_CONFIG.academy.email}?subject=Contacto da Academia ARC &body=Olá, gostaria de obter mais informações sobre os cursos e serviços oferecidos pela Academia ARC.`
                         )
                       }
                     >
@@ -143,7 +145,7 @@ const Contact = () => {
                       className="w-full justify-start"
                       onClick={() =>
                         window.open(
-                          "https://wa.me/925548028?text=Olá, tenho interesse em saber mais sobre os cursos da Academia ARC."
+                          `https://wa.me/${APP_CONFIG.academy.whatsapp}?text=Olá, tenho interesse em saber mais sobre os cursos da Academia ARC.`
                         )
                       }
                     >
@@ -401,19 +403,18 @@ const Contact = () => {
             necessidades.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            
             <Button
               variant="outline"
               size="lg"
               className="bg-white/10 text-white border-white/20 hover:bg-white/20"
               onClick={() =>
                 window.open(
-                  "https://wa.me/925548028?text=Olá, tenho interesse em saber mais sobre os cursos da Academia ARC."
+                  `https://wa.me/${APP_CONFIG.academy.whatsapp}?text=Olá, tenho interesse em mais informações sobre a Academia ARC.`
                 )
               }
             >
               <Phone className="mr-2 h-5 w-5" />
-              peprgunte no Whatsapp
+              pergunte no Whatsapp
             </Button>
           </div>
         </div>

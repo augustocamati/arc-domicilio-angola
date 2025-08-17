@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Clock, Users, Award, BookOpen, Code, Server, Smartphone, Palette, Shield, TrendingUp, GraduationCap, Briefcase } from "lucide-react";
 import webDevImage from "@/assets/web-development.jpg";
 import { Link } from "react-router-dom";
+import { APP_CONFIG } from "@/config/environment";
 
 const Courses = () => {
   const courseCategories = [
@@ -11,105 +12,13 @@ const Courses = () => {
       title: "Formação Profissional",
       description: "Cursos técnicos especializados para profissionais",
       icon: <Briefcase className="h-8 w-8" />,
-      courses: [
-        {
-          title: "Desenvolvimento Web FullStack",
-          description: "Domínio completo de tecnologias front-end e back-end para criação de aplicações web modernas.",
-          duration: "6 meses",
-          level: "Intermediário",
-          students: "Turmas limitadas",
-          icon: <Code className="h-6 w-6" />,
-          topics: ["HTML5/CSS3", "JavaScript", "React", "Node.js", "Bases de Dados"],
-          price: "Sob consulta"
-        },
-        {
-          title: "Administração de Servidores Linux",
-          description: "Gestão completa de sistemas Linux empresariais, segurança e automação de processos.",
-          duration: "4 meses",
-          level: "Avançado",
-          students: "Turmas limitadas",
-          icon: <Server className="h-6 w-6" />,
-          topics: ["Ubuntu Server", "CentOS", "Segurança", "Redes", "Automação"],
-          price: "Sob consulta"
-        },
-        {
-          title: "Programação de Microcontroladores",
-          description: "Arduino, ESP32 e desenvolvimento de sistemas embarcados para automação industrial.",
-          duration: "3 meses",
-          level: "Intermediário",
-          students: "Turmas limitadas",
-          icon: <Smartphone className="h-6 w-6" />,
-          topics: ["Arduino", "ESP32", "Sensores", "IoT", "Automação"],
-          price: "Sob consulta"
-        },
-        {
-          title: "Web Design & UX/UI",
-          description: "Design visual e experiência do utilizador para interfaces digitais modernas.",
-          duration: "4 meses",
-          level: "Básico",
-          students: "Turmas limitadas",
-          icon: <Palette className="h-6 w-6" />,
-          topics: ["Figma", "Adobe XD", "Design Thinking", "Prototipagem", "Usabilidade"],
-          price: "Sob consulta"
-        },
-        {
-          title: "Cibersegurança",
-          description: "Proteção de sistemas, análise de vulnerabilidades e gestão de incidentes de segurança.",
-          duration: "5 meses",
-          level: "Avançado",
-          students: "Turmas limitadas",
-          icon: <Shield className="h-6 w-6" />,
-          topics: ["Ethical Hacking", "Forense Digital", "Redes Seguras", "Compliance", "Gestão de Riscos"],
-          price: "Sob consulta"
-        },
-        {
-          title: "Marketing Digital & SEO",
-          description: "Estratégias digitais, otimização para motores de busca e gestão de campanhas online.",
-          duration: "3 meses",
-          level: "Básico",
-          students: "Turmas limitadas",
-          icon: <TrendingUp className="h-6 w-6" />,
-          topics: ["Google Ads", "Facebook Ads", "SEO", "Analytics", "Content Marketing"],
-          price: "Sob consulta"
-        }
-      ]
+      courses: APP_CONFIG.courses.list.filter(course => course.category === "professional")
     },
     {
-      title: "Explicações Ensino Médio Técnico",
+      title: "Explicações Ensino Médio Técnico", 
       description: "Apoio pedagógico especializado para estudantes do ensino médio técnico",
       icon: <GraduationCap className="h-8 w-8" />,
-      courses: [
-        {
-          title: "Explicações - Curso Médio de Informática",
-          description: "Apoio pedagógico especializado nas disciplinas do curso médio técnico de informática.",
-          duration: "Flexível",
-          level: "Médio Técnico",
-          students: "Personalizado",
-          icon: <Code className="h-6 w-6" />,
-          topics: ["Programação", "Redes", "Hardware", "Sistemas Operacionais", "Bases de Dados"],
-          price: "Sob consulta"
-        },
-        {
-          title: "Explicações - Curso Médio de Electrónica e Telecomunicações",
-          description: "Explicações nas disciplinas técnicas de electrónica e sistemas de telecomunicações.",
-          duration: "Flexível",
-          level: "Médio Técnico",
-          students: "Personalizado",
-          icon: <Server className="h-6 w-6" />,
-          topics: ["Circuitos Eletrónicos", "Telecomunicações", "Sinais e Sistemas", "Automação", "Instrumentação"],
-          price: "Sob consulta"
-        },
-        {
-          title: "Explicações - Curso Médio de Informática e Sistemas Multimédia",
-          description: "Apoio nas disciplinas de informática com foco em sistemas multimédia e design digital.",
-          duration: "Flexível",
-          level: "Médio Técnico",
-          students: "Personalizado",
-          icon: <Smartphone className="h-6 w-6" />,
-          topics: ["Design Gráfico", "Edição de Vídeo", "Programação Web", "Multimédia", "Interfaces Digitais"],
-          price: "Sob consulta"
-        }
-      ]
+      courses: APP_CONFIG.courses.list.filter(course => course.category === "explicacao")
     }
   ];
 
@@ -182,32 +91,38 @@ const Courses = () => {
               {category.courses.map((course, index) => (
                 <Card key={index} className="overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:shadow-card transition-all duration-300 group hover:scale-105">
                   <div className="p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <div className="text-primary">{course.icon}</div>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{course.title}</h3>
-                        <Badge variant="secondary">{course.level}</Badge>
-                      </div>
-                    </div>
+                     <div className="flex items-center gap-3 mb-4">
+                       <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                         <div className="text-primary">
+                           {course.icon === "Code" ? <Code className="h-6 w-6" /> :
+                            course.icon === "Monitor" ? <Smartphone className="h-6 w-6" /> :
+                            course.icon === "Cpu" ? <Server className="h-6 w-6" /> :
+                            course.icon === "Server" ? <Server className="h-6 w-6" /> :
+                            <Code className="h-6 w-6" />}
+                         </div>
+                       </div>
+                       <div>
+                         <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{course.title}</h3>
+                         <Badge variant="secondary">{course.level}</Badge>
+                       </div>
+                     </div>
 
-                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{course.description}</p>
+                     <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{course.description}</p>
 
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="h-4 w-4" />
-                        <span>Duração: {course.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Users className="h-4 w-4" />
-                        <span>Modalidade: {course.students}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Award className="h-4 w-4" />
-                        <span>Preço: {course.price}</span>
-                      </div>
-                    </div>
+                     <div className="space-y-3 mb-6">
+                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                         <Clock className="h-4 w-4" />
+                         <span>Duração: {course.duration}</span>
+                       </div>
+                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                         <Users className="h-4 w-4" />
+                         <span>Modalidade: Presencial</span>
+                       </div>
+                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                         <Award className="h-4 w-4" />
+                         <span>Preço: Sob consulta</span>
+                       </div>
+                     </div>
 
                     <div className="mb-6">
                       <h4 className="text-sm font-semibold mb-2 text-foreground">Tópicos principais:</h4>

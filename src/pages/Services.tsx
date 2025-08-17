@@ -1,6 +1,4 @@
 import { Card } from "@/components/ui/card"
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { APP_CONFIG } from "@/config/environment"
@@ -18,145 +16,13 @@ import {
   ArrowRight,
   Briefcase,
   Settings,
+  Network,
+  Cpu,
 } from "lucide-react"
 import { Link } from "react-router-dom"
 
 const Services = () => {
-  const serviceCategories = [
-    {
-      title: "Desenvolvimento de Software",
-      description: "Soluções digitais personalizadas para empresas",
-      icon: <Code className="h-8 w-8" />,
-      services: [
-        {
-          title: "Desenvolvimento Web Empresarial",
-          description:
-            "Criação de websites corporativos, portais empresariais e sistemas web robustos com tecnologias modernas.",
-          icon: <Globe className="h-6 w-6" />,
-          features: [
-            "Design responsivo",
-            "SEO otimizado",
-            "Painel administrativo",
-            "Integração com APIs",
-          ],
-          timeline: "4-12 semanas",
-          complexity: "Média-Alta",
-        },
-        {
-          title: "Aplicações Mobile",
-          description:
-            "Desenvolvimento de aplicações nativas e híbridas para Android e iOS, focadas na experiência do utilizador.",
-          icon: <Smartphone className="h-6 w-6" />,
-          features: [
-            "iOS & Android",
-            "Interface intuitiva",
-            "Notificações push",
-            "Sincronização offline",
-          ],
-          timeline: "8-16 semanas",
-          complexity: "Alta",
-        },
-        {
-          title: "Sistemas de Gestão Empresarial",
-          description:
-            "ERPs personalizados, sistemas de inventário, CRM e soluções de gestão adaptadas ao negócio.",
-          icon: <Database className="h-6 w-6" />,
-          features: [
-            "Gestão de inventário",
-            "Relatórios avançados",
-            "Multi-utilizador",
-            "Backup automático",
-          ],
-          timeline: "12-24 semanas",
-          complexity: "Alta",
-        },
-      ],
-    },
-    {
-      title: "Consultoria Técnica",
-      description: "Assessoria especializada em tecnologia e processos",
-      icon: <Briefcase className="h-8 w-8" />,
-      services: [
-        {
-          title: "Auditoria de Sistemas",
-          description:
-            "Análise completa da infraestrutura tecnológica existente, identificação de vulnerabilidades e recomendações de melhoria.",
-          icon: <Shield className="h-6 w-6" />,
-          features: [
-            "Análise de segurança",
-            "Avaliação de performance",
-            "Relatório detalhado",
-            "Plano de melhorias",
-          ],
-          timeline: "2-6 semanas",
-          complexity: "Média",
-        },
-        {
-          title: "Implementação de Infraestrutura",
-          description:
-            "Instalação e configuração de servidores, redes empresariais e sistemas de backup e recuperação.",
-          icon: <Server className="h-6 w-6" />,
-          features: [
-            "Configuração de servidores",
-            "Redes empresariais",
-            "Backup e recuperação",
-            "Monitorização",
-          ],
-          timeline: "4-10 semanas",
-          complexity: "Alta",
-        },
-        {
-          title: "Transformação Digital",
-          description:
-            "Assessoria para modernização de processos empresariais através da adopção de tecnologias inovadoras.",
-          icon: <TrendingUp className="h-6 w-6" />,
-          features: [
-            "Análise de processos",
-            "Estratégia digital",
-            "Formação de equipas",
-            "Implementação gradual",
-          ],
-          timeline: "8-20 semanas",
-          complexity: "Alta",
-        },
-      ],
-    },
-    {
-      title: "Suporte e Manutenção",
-      description: "Assistência técnica contínua e manutenção preventiva",
-      icon: <Settings className="h-8 w-8" />,
-      services: [
-        {
-          title: "Suporte Técnico 24/7",
-          description:
-            "Assistência técnica contínua para sistemas críticos com tempos de resposta garantidos.",
-          icon: <Users className="h-6 w-6" />,
-          features: [
-            "Disponibilidade 24/7",
-            "Suporte remoto",
-            "Resposta rápida",
-            "Escalação de incidentes",
-          ],
-          timeline: "Contínuo",
-          complexity: "Variável",
-        },
-        {
-          title: "Manutenção Preventiva",
-          description:
-            "Manutenção regular de sistemas, atualizações de segurança e otimização de performance.",
-          icon: <CheckCircle className="h-6 w-6" />,
-          features: [
-            "Atualizações regulares",
-            "Otimização",
-            "Backup verificado",
-            "Relatórios mensais",
-          ],
-          timeline: "Contínuo",
-          complexity: "Baixa-Média",
-        },
-      ],
-    },
-  ]
+  const serviceCategories = APP_CONFIG.services.list;
 
   const portfolio = [
     {
@@ -214,6 +80,23 @@ const Services = () => {
     },
   ]
 
+  const getIconForService = (iconName: string) => {
+    switch (iconName) {
+      case "Globe":
+        return <Globe className="h-6 w-6" />
+      case "Cpu":
+        return <Cpu className="h-6 w-6" />
+      case "Network":
+        return <Network className="h-6 w-6" />
+      case "Server":
+        return <Server className="h-6 w-6" />
+      case "Code":
+        return <Code className="h-6 w-6" />
+      default:
+        return <Code className="h-6 w-6" />
+    }
+  }
+
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
@@ -248,88 +131,75 @@ const Services = () => {
       </section>
 
       {/* Service Categories */}
-      {serviceCategories.map((category, categoryIndex) => (
-        <section
-          key={categoryIndex}
-          className={`py-20 ${categoryIndex % 2 === 0 ? "bg-muted/30" : ""}`}
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <div className="text-primary">{category.icon}</div>
-              </div>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  {category.title}
-                </span>
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                {category.description}
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {category.services.map((service, index) => (
-                <Card
-                  key={index}
-                  className="overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:shadow-card transition-all duration-300 group hover:scale-105"
-                >
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <div className="text-primary">{service.icon}</div>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                          {service.title}
-                        </h3>
-                        <div className="flex gap-2 mt-1">
-                          <Badge variant="outline" className="text-xs">
-                            {service.timeline}
-                          </Badge>
-                          <Badge variant="secondary" className="text-xs">
-                            {service.complexity}
-                          </Badge>
-                        </div>
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    <div className="mb-6">
-                      <h4 className="text-sm font-semibold mb-3 text-foreground">
-                        Características principais:
-                      </h4>
-                      <div className="space-y-2">
-                        {service.features.map((feature, featureIndex) => (
-                          <div
-                            key={featureIndex}
-                            className="flex items-center gap-2"
-                          >
-                            <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
-                            <span className="text-xs text-muted-foreground">
-                              {feature}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <Link to="/contacto">
-                      <Button className="w-full hover:scale-105 transition-transform">
-                        Solicitar Orçamento
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </div>
-                </Card>
-              ))}
-            </div>
+      <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Nossos Serviços
+              </span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Soluções técnicas completas e personalizadas para o seu negócio
+            </p>
           </div>
-        </section>
-      ))}
+
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+            {serviceCategories.map((service, index) => (
+              <Card
+                key={index}
+                className="overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:shadow-card transition-all duration-300 group hover:scale-105"
+              >
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <div className="text-primary">{getIconForService(service.icon)}</div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {service.title}
+                      </h3>
+                      <Badge variant="outline" className="text-xs mt-1">
+                        {service.category}
+                      </Badge>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold mb-3 text-foreground">
+                      Características principais:
+                    </h4>
+                    <div className="space-y-2">
+                      {service.features.map((feature, featureIndex) => (
+                        <div
+                          key={featureIndex}
+                          className="flex items-center gap-2"
+                        >
+                          <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
+                          <span className="text-xs text-muted-foreground">
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Link to="/contacto">
+                    <Button className="w-full hover:scale-105 transition-transform">
+                      Solicitar Orçamento
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Process */}
       <section className="py-20">

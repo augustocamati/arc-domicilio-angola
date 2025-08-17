@@ -16,83 +16,11 @@ import {
   ChevronRight
 } from "lucide-react";
 import webDevImage from "@/assets/web-development.jpg";
+import { APP_CONFIG } from "@/config/environment";
+import { Link } from "react-router-dom";
 
 const Courses = () => {
-  const courses = [
-    {
-      icon: <Code className="h-8 w-8" />,
-      title: "Desenvolvimento Web FullStack",
-      description: "Aprenda a criar aplicações web completas, desde o front-end até ao back-end, utilizando as tecnologias mais actuais do mercado.",
-      duration: "6-8 semanas",
-      level: "Iniciante a Avançado",
-      topics: ["HTML, CSS, JavaScript", "React/Vue.js", "Node.js", "Bases de dados", "APIs REST"],
-      popular: true
-    },
-    {
-      icon: <Monitor className="h-8 w-8" />,
-      title: "Front-End & Web Designer",
-      description: "Domine as técnicas de design e desenvolvimento de interfaces modernas, responsivas e centradas no utilizador.",
-      duration: "4-6 semanas",
-      level: "Iniciante",
-      topics: ["Design UI/UX", "CSS Avançado", "JavaScript", "Frameworks CSS", "Prototipagem"]
-    },
-    {
-      icon: <Cpu className="h-8 w-8" />,
-      title: "Programação de Microcontroladores",
-      description: "Desenvolva projectos de automação e IoT utilizando Arduino, ESP32 e outras plataformas de desenvolvimento.",
-      duration: "5-7 semanas",
-      level: "Intermediário",
-      topics: ["Arduino Programming", "ESP32/ESP8266", "Sensores e Actuadores", "IoT", "Automação"]
-    },
-    {
-      icon: <Network className="h-8 w-8" />,
-      title: "Redes de Computadores",
-      description: "Compreenda e configure redes desde o básico até configurações empresariais avançadas.",
-      duration: "6-8 semanas",
-      level: "Básico a Avançado",
-      topics: ["Fundamentos TCP/IP", "Configuração de routers", "Segurança de redes", "VPN", "Monitorização"]
-    },
-    {
-      icon: <Server className="h-8 w-8" />,
-      title: "Administração de Servidores Linux",
-      description: "Gerencie servidores Linux de forma profissional, desde a instalação até à manutenção e segurança.",
-      duration: "5-6 semanas",
-      level: "Intermediário a Avançado",
-      topics: ["Instalação e configuração", "Shell scripting", "Segurança", "Backup e recuperação", "Monitorização"]
-    },
-    {
-      icon: <Globe className="h-8 w-8" />,
-      title: "WordPress & Lojas Virtuais",
-      description: "Crie sites profissionais e lojas online utilizando WordPress, WooCommerce e outras ferramentas.",
-      duration: "3-4 semanas",
-      level: "Iniciante",
-      topics: ["WordPress básico", "Personalização de temas", "WooCommerce", "SEO básico", "Manutenção"]
-    },
-    {
-      icon: <Search className="h-8 w-8" />,
-      title: "SEO e Marketing Digital",
-      description: "Aprenda a optimizar sites para motores de busca e desenvolva estratégias de marketing digital eficazes.",
-      duration: "4-5 semanas",
-      level: "Iniciante a Intermediário",
-      topics: ["SEO On-page/Off-page", "Google Analytics", "Google Ads", "Social Media Marketing", "Content Marketing"]
-    },
-    {
-      icon: <Shield className="h-8 w-8" />,
-      title: "Desenvolvimento Seguro",
-      description: "Desenvolva aplicações com foco na segurança, implementando as melhores práticas de cybersegurança.",
-      duration: "5-6 semanas",
-      level: "Intermediário a Avançado",
-      topics: ["Segurança em aplicações web", "Criptografia", "Testes de penetração", "OWASP", "Secure coding"]
-    },
-    {
-      icon: <Briefcase className="h-8 w-8" />,
-      title: "Engenharia de Software Empresarial",
-      description: "Aprenda metodologias e ferramentas para desenvolvimento de software em ambiente empresarial.",
-      duration: "8-10 semanas",
-      level: "Avançado",
-      topics: ["Metodologias ágeis", "DevOps", "Arquitectura de software", "Gestão de projectos", "Clean Code"]
-    }
-  ];
+  const courses = APP_CONFIG.courses.list;
 
   const scrollToContact = () => {
     const element = document.querySelector("#contact");
@@ -142,10 +70,12 @@ const Courses = () => {
                       Iniciante a Avançado
                     </div>
                   </div>
-                  <Button variant="hero" onClick={scrollToContact} className="group">
-                    Inscrever-se Agora
-                    <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to="/inscricao">
+                    <Button variant="hero" className="group">
+                      Inscrever-se Agora
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </div>
                 <div className="relative h-64 lg:h-auto">
                   <img 
@@ -172,7 +102,12 @@ const Courses = () => {
               
               <div className="mb-6">
                 <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <div className="text-primary">{course.icon}</div>
+                  <div className="text-primary">
+                    {course.icon === 'Code' && <Code className="h-8 w-8" />}
+                    {course.icon === 'Monitor' && <Monitor className="h-8 w-8" />}
+                    {course.icon === 'Cpu' && <Cpu className="h-8 w-8" />}
+                    {course.icon === 'Server' && <Server className="h-8 w-8" />}
+                  </div>
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-foreground">{course.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{course.description}</p>
@@ -205,13 +140,14 @@ const Courses = () => {
                 </div>
               </div>
 
-              <Button 
-                variant="outline" 
-                className="w-full group-hover:bg-primary group-hover:text-primary-foreground"
-                onClick={scrollToContact}
-              >
-                Saber Mais
-              </Button>
+              <Link to="/inscricao">
+                <Button 
+                  variant="outline" 
+                  className="w-full group-hover:bg-primary group-hover:text-primary-foreground"
+                >
+                  Saber Mais
+                </Button>
+              </Link>
             </Card>
           ))}
         </div>
@@ -226,9 +162,11 @@ const Courses = () => {
               Desenvolvemos formações personalizadas de acordo com as suas necessidades específicas. 
               Entre em contacto connosco para discutir o seu projecto educacional.
             </p>
-            <Button variant="hero" size="lg" onClick={scrollToContact}>
-              Solicitar Curso Personalizado
-            </Button>
+            <Link to="/inscricao">
+              <Button variant="hero" size="lg">
+                Solicitar Curso Personalizado
+              </Button>
+            </Link>
           </div>
         </div>
 

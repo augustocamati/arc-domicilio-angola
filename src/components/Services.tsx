@@ -12,53 +12,10 @@ import {
   Smartphone,
   Database
 } from "lucide-react";
-import { generateBudgetWhatsAppLink } from "@/config/environment";
+import { generateBudgetWhatsAppLink, APP_CONFIG } from "@/config/environment";
 
 const Services = () => {
-  const services = [
-    {
-      icon: <Globe className="h-8 w-8" />,
-      title: "Criação de Sites e Lojas Virtuais",
-      description: "Desenvolvemos sites profissionais, blogs e lojas online completas, optimizadas para motores de busca e dispositivos móveis.",
-      features: ["Design responsivo", "SEO optimizado", "Integração com pagamentos", "Painel administrativo"],
-      category: "Web Development"
-    },
-    {
-      icon: <Cpu className="h-8 w-8" />,
-      title: "Automação com Microcontroladores",
-      description: "Projectos de automação residencial e empresarial utilizando Arduino, ESP32 e outras tecnologias IoT.",
-      features: ["Domótica inteligente", "Monitorização remota", "Sensores personalizados", "Aplicações móveis"],
-      category: "IoT & Automation"
-    },
-    {
-      icon: <Network className="h-8 w-8" />,
-      title: "Consultoria em Redes e Infraestrutura",
-      description: "Análise, design e implementação de redes empresariais seguras e eficientes para o seu negócio.",
-      features: ["Auditoria de redes", "Configuração de segurança", "Monitorização 24/7", "Documentação técnica"],
-      category: "Network Solutions"
-    },
-    {
-      icon: <Server className="h-8 w-8" />,
-      title: "Servidores e Ambientes Corporativos",
-      description: "Implantação e gestão de servidores Linux, configuração de ambientes de desenvolvimento e produção.",
-      features: ["Instalação e configuração", "Backup automático", "Monitorização", "Manutenção preventiva"],
-      category: "Infrastructure"
-    },
-    {
-      icon: <Code className="h-8 w-8" />,
-      title: "Sistemas Empresariais Personalizados",
-      description: "Desenvolvimento de software sob medida para gestão empresarial, CRM, ERP e painéis administrativos.",
-      features: ["Análise de requisitos", "Interface intuitiva", "Integração com APIs", "Suporte técnico"],
-      category: "Custom Software"
-    },
-    {
-      icon: <Settings className="h-8 w-8" />,
-      title: "Optimização e Manutenção Web",
-      description: "Serviços de melhoria de performance, segurança e manutenção contínua de websites existentes.",
-      features: ["Optimização de velocidade", "Actualizações de segurança", "Backup regular", "Monitorização"],
-      category: "Maintenance"
-    }
-  ];
+  const services = APP_CONFIG.services.list;
 
   const tools = [
     { icon: <Wrench className="h-6 w-6" />, name: "Multímetro e Ferro de Solda" },
@@ -103,7 +60,13 @@ const Services = () => {
             <Card key={index} className="group hover:shadow-card transition-all duration-300 border-0 bg-card/70 backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <div className="text-primary">{service.icon}</div>
+                  <div className="text-primary">
+                    {service.icon === 'Globe' && <Globe className="h-8 w-8" />}
+                    {service.icon === 'Cpu' && <Cpu className="h-8 w-8" />}
+                    {service.icon === 'Network' && <Network className="h-8 w-8" />}
+                    {service.icon === 'Server' && <Server className="h-8 w-8" />}
+                    {service.icon === 'Code' && <Code className="h-8 w-8" />}
+                  </div>
                 </div>
                 <div className="mb-2">
                   <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full">

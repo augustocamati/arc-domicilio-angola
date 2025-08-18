@@ -190,6 +190,7 @@ const Contact = () => {
                         name="name"
                         type="text"
                         required
+                        placeholder="Digite o seu nome completo"
                         value={formData.name}
                         onChange={handleChange}
                         className="hover:border-primary/50 focus:border-primary transition-colors"
@@ -207,6 +208,7 @@ const Contact = () => {
                         name="email"
                         type="email"
                         required
+                        placeholder="Digite o seu email"
                         value={formData.email}
                         onChange={handleChange}
                         className="hover:border-primary/50 focus:border-primary transition-colors"
@@ -226,6 +228,7 @@ const Contact = () => {
                         id="phone"
                         name="phone"
                         type="tel"
+                        placeholder="Digite o seu número de telefone"
                         value={formData.phone}
                         onChange={handleChange}
                         className="hover:border-primary/50 focus:border-primary transition-colors"
@@ -267,6 +270,7 @@ const Contact = () => {
                       name="subject"
                       type="text"
                       required
+                      placeholder="Digite o assunto"
                       value={formData.subject}
                       onChange={handleChange}
                       className="hover:border-primary/50 focus:border-primary transition-colors"

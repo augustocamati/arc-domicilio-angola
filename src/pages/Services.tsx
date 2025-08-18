@@ -1,7 +1,10 @@
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { APP_CONFIG } from "@/config/environment"
+import {
+  APP_CONFIG,
+  generateBudgetWhatsAppLink ,
+} from "@/config/environment"
 
 import {
   Code,
@@ -24,6 +27,9 @@ import { Link } from "react-router-dom"
 const Services = () => {
   const serviceCategories = APP_CONFIG.services.list;
 
+  const handleBudgetRequest = (title: string = "") => {
+    window.open(generateBudgetWhatsAppLink(title), "_blank")
+  }
   const portfolio = [
     {
       title: "Sistema de Gestão Escolar",
@@ -153,7 +159,9 @@ const Services = () => {
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <div className="text-primary">{getIconForService(service.icon)}</div>
+                      <div className="text-primary">
+                        {getIconForService(service.icon)}
+                      </div>
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
@@ -187,13 +195,16 @@ const Services = () => {
                       ))}
                     </div>
                   </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full hover:scale-105 transition-transform"
+                    onClick={() => handleBudgetRequest(service.title)}
+                  >
+                    Solicitar Orçamento
+                  </Button>
 
-                  <Link to="/contacto">
-                    <Button className="w-full hover:scale-105 transition-transform">
-                      Solicitar Orçamento
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
+                 
                 </div>
               </Card>
             ))}

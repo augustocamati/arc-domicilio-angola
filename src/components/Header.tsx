@@ -36,13 +36,15 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {APP_CONFIG.urls.links.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => handleNavigation(item.href)}
-                className="text-foreground hover:text-primary transition-colors duration-300"
-              >
-                {item.label}
-              </button>
+              <Link to={item.href} key={item.label}>
+                <button
+                  
+                  // onClick={() => handleNavigation(item.href)}
+                  className="text-foreground hover:text-primary transition-colors duration-300"
+                >
+                  {item.label}
+                </button>
+              </Link>
             ))}
           </nav>
 
@@ -53,12 +55,8 @@ const Header = () => {
               <span>{APP_CONFIG.academy.email}</span>
             </div>
             <Link to="/inscricao">
-              <Button
-                variant="hero"
-                size="sm"
-               
-              >
-                Marcarr Explicação
+              <Button variant="hero" size="sm">
+                Marcar Explicação
               </Button>
             </Link>
           </div>

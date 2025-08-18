@@ -58,7 +58,7 @@ const Header = () => {
                 size="sm"
                
               >
-                Marcar Explicação
+                Marcarr Explicação
               </Button>
             </Link>
           </div>

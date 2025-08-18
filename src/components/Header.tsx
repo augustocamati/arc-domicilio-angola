@@ -3,6 +3,7 @@ import { Menu, X, Phone, Mail } from "lucide-react"
 import { useState } from "react"
 import EnrollmentForm from "./EnrollmentForm"
 import { APP_CONFIG } from "@/config/environment"
+import { Link } from "react-router-dom"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -51,13 +52,15 @@ const Header = () => {
               <Mail className="h-4 w-4" />
               <span>{APP_CONFIG.academy.email}</span>
             </div>
-            <Button
-              variant="hero"
-              size="sm"
-              onClick={() => setIsEnrollmentOpen(true)}
-            >
-              Marcar Explicação
-            </Button>
+            <Link to="/inscricao">
+              <Button
+                variant="hero"
+                size="sm"
+               
+              >
+                Marcar Explicação
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}

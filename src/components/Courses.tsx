@@ -140,7 +140,7 @@ const Courses = () => {
                 </div>
               </div>
 
-              <Link to="/inscricao">
+              <Link to="/cursos">
                 <Button 
                   variant="outline" 
                   className="w-full group-hover:bg-primary group-hover:text-primary-foreground"

@@ -46,14 +46,14 @@ const Courses = () => {
                 desde formação profissional até ensino médio técnico.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/contacto">
-                  <Button variant="secondary" size="lg" className="hover:scale-105 transition-transform">
+                <Link to="/inscricao">
+                  <Button variant="vilan" size="lg" className="hover:scale-105 transition-transform">
                     Inscrever-se Agora
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
+                {/* <Button variant="outline" size="lg" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
                   Ver Calendário
-                </Button>
+                </Button> */}
               </div>
             </div>
             <div className="relative">
@@ -136,7 +136,7 @@ const Courses = () => {
                     </div>
 
                     <div className="flex gap-2">
-                      <Link to="/contacto" className="flex-1">
+                      <Link to="/inscricao" className="flex-1">
                         <Button className="w-full hover:scale-105 transition-transform">
                           Inscrever-se
                         </Button>

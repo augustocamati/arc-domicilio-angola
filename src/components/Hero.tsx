@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, Home, Users } from "lucide-react";
 import EnrollmentForm from "@/components/EnrollmentForm";
 import heroImage from "@/assets/hero-academy.jpg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
     const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false)
@@ -86,15 +87,14 @@ const Hero = () => {
                 Ver Cursos Disponíveis
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => setIsEnrollmentOpen(true)}
-              >
-                <BookOpen className="h-5 w-5" />
-                Marcar Explicação
-              </Button>
-              <EnrollmentForm />
+             
+
+              <Link to="/inscricao">
+                <Button variant="outline" size="lg">
+                  <BookOpen className="h-5 w-5" />
+                  Marcar Explicação
+                </Button>
+              </Link>
             </div>
 
             {/* Features */}

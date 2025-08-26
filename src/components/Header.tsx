@@ -38,7 +38,6 @@ const Header = () => {
             {APP_CONFIG.urls.links.map((item) => (
               <Link to={item.href} key={item.label}>
                 <button
-                  
                   // onClick={() => handleNavigation(item.href)}
                   className="text-foreground hover:text-primary transition-colors duration-300"
                 >
@@ -82,24 +81,29 @@ const Header = () => {
           <div className="md:hidden py-4 border-t border-border">
             <nav className="flex flex-col space-y-4">
               {APP_CONFIG.urls.links.map((item) => (
-                <button
+                <Link
+                  to={item.href}
                   key={item.label}
-                  onClick={() => handleNavigation(item.href)}
-                  className="text-left text-foreground hover:text-primary transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.label}
-                </button>
+                  <button className="text-foreground hover:text-primary transition-colors duration-300">
+                    {item.label}
+                  </button>
+                </Link>
               ))}
               <div className="pt-4 border-t border-border">
                 <Button
                   variant="hero"
                   className="w-full"
                   onClick={() => {
-                    setIsEnrollmentOpen(true)
                     setIsMenuOpen(false)
                   }}
                 >
-                  Marcar Explicação
+                  <Link to="/inscricao">
+                    <Button variant="hero" size="sm">
+                      Marcar Explicação
+                    </Button>
+                  </Link>
                 </Button>
               </div>
             </nav>

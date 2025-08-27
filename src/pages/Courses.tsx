@@ -151,7 +151,7 @@ const Courses = () => {
                       </div>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Users className="h-4 w-4" />
-                        <span>Modalidade: Presencial</span>
+                        <span>Modalidade: {course.modalidade.join(", ")}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Award className="h-4 w-4" />

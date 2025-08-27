@@ -297,7 +297,7 @@ Informações Adicionais: ${formData.additionalInfo}`
   // Filtrar cursos por categoria
   const availableCourses = APP_CONFIG.courses.list.filter((course) =>
     formData.type === "curso"
-      ? course.category === "professional"
+      ? course.category !== "explicacao"
       : course.category === "explicacao"
   )
 
@@ -759,6 +759,8 @@ Informações Adicionais: ${formData.additionalInfo}`
                           <SelectValue placeholder="Selecione o horário" />
                         </SelectTrigger>
                         <SelectContent>
+                         
+
                           {schedules.map((schedule) => (
                             <SelectItem key={schedule} value={schedule}>
                               {schedule}

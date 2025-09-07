@@ -124,6 +124,20 @@ const EnrollmentForm = () => {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    
+    // Auto-fill fields when course is selected
+    if (field === "selectedCourse") {
+      const selectedCourse = APP_CONFIG.courses.list.find(course => course.title === value)
+      if (selectedCourse) {
+        setFormData((prev) => ({
+          ...prev,
+          [field]: value,
+          duration: selectedCourse.duration || prev.duration,
+          // Reset subjects when changing course
+          subjects: []
+        }))
+      }
+    }
   }
 
   const handleSubjectChange = (subject: string, checked: boolean) => {
@@ -300,6 +314,82 @@ Informações Adicionais: ${formData.additionalInfo}`
       ? course.category !== "explicacao"
       : course.category === "explicacao"
   )
+
+  // Filtrar disciplinas baseado no curso selecionado para explicações
+  const getFilteredSubjects = () => {
+    if (formData.type !== "explicacao" || !formData.selectedCourse) {
+      return subjects
+    }
+
+    const selectedCourse = APP_CONFIG.courses.list.find(
+      course => course.title === formData.selectedCourse
+    )
+
+    if (!selectedCourse) return subjects
+
+    // Mapear cursos específicos para suas disciplinas
+    const courseSubjects: { [key: string]: string[] } = {
+      "Explicações - Curso Médio de Informática": [
+        "Matemática",
+        "Física",
+        "Português",
+        "Inglês",
+        "Sistemas De Informação",
+        "Sistemas Digitais",
+        "Telecomunicações",
+        "Tecnologias De Telecomunicações",
+        "Tecnologias De Informação e Comunicação",
+        "Técnicas De Linguagem De Programação",
+        "Sistema De Exploração E Arquitectura De Computadores"
+      ],
+      "Explicações - Curso Médio de Electrónica": [
+        "Matemática",
+        "Física",
+        "Português",
+        "Inglês",
+        "Electrónica",
+        "Electrotecnia",
+        "Electricidade",
+        "Desnho Técnico",
+        "Prática Oficinal"
+      ],
+      "Explicações - Curso Médio de Informática e Multimédia": [
+        "Matemática",
+        "Física",
+        "Português",
+        "Inglês",
+        "Sistemas De Informação",
+        "Produção De Multimidia",
+        "Tecnologias De Informação e Comunicação",
+        "Técnicas De Linguagem De Programação"
+      ],
+      "Explicações - Ensino Primário (5º ao 6º ano)": [
+        "Matemática",
+        "Português",
+        "Inglês",
+        "Estudo Do Meio"
+      ],
+      "Explicações - Ensino Médio de Economia e Contabilidade": [
+        "Matemática",
+        "Português",
+        "Inglês",
+        "Estatística",
+        "Contabilidade Geral",
+        "Contabilidade Financeira",
+        "Economia"
+      ],
+      "Explicações - Ensino Médio PUNIV (Ciências Exactas)": [
+        "Matemática",
+        "Física",
+        "Química",
+        "Português",
+        "Inglês",
+        "Geometria Descritiva"
+      ]
+    }
+
+    return courseSubjects[selectedCourse.title] || subjects
+  }
 
   return (
     <div className="min-h-screen pt-16 bg-muted/20">
@@ -719,30 +809,30 @@ Informações Adicionais: ${formData.additionalInfo}`
                     />
                   </div>
 
-                  {formData.type === "explicacao" && (
-                    <div>
-                      <Label>Disciplinas de Interesse *</Label>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
-                        {subjects.map((subject) => (
-                          <div
-                            key={subject}
-                            className="flex items-center space-x-2"
-                          >
-                            <Checkbox
-                              id={subject}
-                              checked={formData.subjects.includes(subject)}
-                              onCheckedChange={(checked) =>
-                                handleSubjectChange(subject, checked as boolean)
-                              }
-                            />
-                            <Label htmlFor={subject} className="text-sm">
-                              {subject}
-                            </Label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                   {formData.type === "explicacao" && (
+                     <div>
+                       <Label>Disciplinas de Interesse *</Label>
+                       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
+                         {getFilteredSubjects().map((subject) => (
+                           <div
+                             key={subject}
+                             className="flex items-center space-x-2"
+                           >
+                             <Checkbox
+                               id={subject}
+                               checked={formData.subjects.includes(subject)}
+                               onCheckedChange={(checked) =>
+                                 handleSubjectChange(subject, checked as boolean)
+                               }
+                             />
+                             <Label htmlFor={subject} className="text-sm">
+                               {subject}
+                             </Label>
+                           </div>
+                         ))}
+                       </div>
+                     </div>
+                   )}
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>

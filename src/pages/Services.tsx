@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
   APP_CONFIG,
-  generateBudgetWhatsAppLink ,
+  generateBudgetWhatsAppLink,
+  generateWhatsAppLink
 } from "@/config/environment"
 
 import {
@@ -116,15 +117,14 @@ const Services = () => {
             buscam inovação, eficiência e crescimento sustentável.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contacto">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="hover:scale-105 transition-transform"
-              >
-                Solicitar Orçamento
-              </Button>
-            </Link>
+            <Button
+              variant="secondary"
+              size="lg"
+              className="hover:scale-105 transition-transform"
+              onClick={() => window.open(generateBudgetWhatsAppLink(), "_blank")}
+            >
+              Solicitar Orçamento
+            </Button>
             <Button
               variant="outline"
               size="lg"
@@ -257,15 +257,14 @@ const Services = () => {
             empresa a alcançar novos patamares através da tecnologia.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contacto">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="hover:scale-105 transition-transform"
-              >
-                Iniciar Projeto
-              </Button>
-            </Link>
+            <Button
+              variant="secondary"
+              size="lg"
+              className="hover:scale-105 transition-transform"
+              onClick={() => window.open(generateWhatsAppLink("Olá! Gostaria de iniciar um projeto com a Academia ARC. Podem me dar mais informações sobre como começar?"), "_blank")}
+            >
+              Iniciar Projeto
+            </Button>
             <Button
               variant="outline"
               size="lg"

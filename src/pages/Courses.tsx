@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Clock, Users, Award, BookOpen, Code, Server, Smartphone, Palette, Shield, TrendingUp, GraduationCap, Briefcase, Monitor, Cpu, Network, Film, ShoppingCart, Book, Settings } from "lucide-react";
 import webDevImage from "@/assets/web-development.jpg";
 import { Link } from "react-router-dom";
-import { APP_CONFIG } from "@/config/environment";
+import { APP_CONFIG, generateWhatsAppLink } from "@/config/environment";
 
 const Courses = () => {
   const courseCategories = [
@@ -226,15 +226,14 @@ const Courses = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/contacto">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="hover:scale-105 transition-transform"
-              >
-                Comece Hoje Mesmo
-              </Button>
-            </Link>
+            <Button
+              variant="secondary"
+              size="lg"
+              className="hover:scale-105 transition-transform"
+              onClick={() => window.open(generateWhatsAppLink("Olá! Gostaria de começar hoje mesmo com os cursos da Academia ARC. Podem me ajudar?"), "_blank")}
+            >
+              Comece Hoje Mesmo
+            </Button>
           </div>
         </div>
       </section>

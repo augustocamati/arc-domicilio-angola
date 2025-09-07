@@ -137,6 +137,8 @@ const EnrollmentForm = () => {
           subjects: [],
           // Auto-fill course field for explicações based on the selected explanation type
           currentCourse: formData.type === "explicacao" ? getRelatedCourse(value) : prev.currentCourse,
+          // Auto-fill suggested grade for professional courses
+          currentGrade: formData.type === "curso" ? getSuggestedGrade(value) : prev.currentGrade,
         }))
       }
     }
@@ -153,6 +155,22 @@ const EnrollmentForm = () => {
       "Explicações - Ensino Médio PUNIV (Ciências Exactas)": "Ensino Médio PUNIV (Ciências Exactas)"
     }
     return courseMapping[explicationType] || ""
+  }
+
+  // Helper function to suggest appropriate grade for professional courses
+  const getSuggestedGrade = (courseTitle: string): string => {
+    const gradeMapping: { [key: string]: string } = {
+      "Desenvolvimento Web FullStack": "Profissional",
+      "Front-end & Web Designer": "Profissional", 
+      "Programação de Microcontroladores": "Profissional",
+      "Desenvolvimento de Blogs e Lojas Virtuais (WordPress)": "Profissional",
+      "SEO e Marketing Digital para Websites": "Profissional",
+      "Redes de Computadores (Básico a Avançado)": "Profissional",
+      "Administração de Servidores Linux": "Profissional",
+      "Desenvolvimento Seguro (Web Security)": "Profissional",
+      "Engenharia de Software para Sistemas Empresariais": "Profissional"
+    }
+    return gradeMapping[courseTitle] || ""
   }
 
   const handleSubjectChange = (subject: string, checked: boolean) => {
@@ -330,80 +348,128 @@ Informações Adicionais: ${formData.additionalInfo}`
       : course.category === "explicacao"
   )
 
-  // Filtrar disciplinas baseado no curso selecionado para explicações
+  // Filtrar disciplinas baseado no curso selecionado
   const getFilteredSubjects = () => {
-    if (formData.type !== "explicacao" || !formData.selectedCourse) {
-      return subjects
+    if (formData.type === "explicacao" && formData.selectedCourse) {
+      // Para explicações, filtrar por curso específico
+      const selectedCourse = APP_CONFIG.courses.list.find(
+        course => course.title === formData.selectedCourse
+      )
+
+      if (!selectedCourse) return subjects
+
+      // Mapear cursos específicos para suas disciplinas
+      const courseSubjects: { [key: string]: string[] } = {
+        "Explicações - Curso Médio de Informática": [
+          "Matemática",
+          "Física",
+          "Português",
+          "Inglês",
+          "Sistemas De Informação",
+          "Sistemas Digitais",
+          "Telecomunicações",
+          "Tecnologias De Telecomunicações",
+          "Tecnologias De Informação e Comunicação",
+          "Técnicas De Linguagem De Programação",
+          "Sistema De Exploração E Arquitectura De Computadores"
+        ],
+        "Explicações - Curso Médio de Electrónica": [
+          "Matemática",
+          "Física",
+          "Português",
+          "Inglês",
+          "Electrónica",
+          "Electrotecnia",
+          "Electricidade",
+          "Desnho Técnico",
+          "Prática Oficinal"
+        ],
+        "Explicações - Curso Médio de Informática e Multimédia": [
+          "Matemática",
+          "Física",
+          "Português",
+          "Inglês",
+          "Sistemas De Informação",
+          "Produção De Multimidia",
+          "Tecnologias De Informação e Comunicação",
+          "Técnicas De Linguagem De Programação"
+        ],
+        "Explicações - Ensino Primário (5º ao 6º ano)": [
+          "Matemática",
+          "Português",
+          "Inglês",
+          "Estudo Do Meio"
+        ],
+        "Explicações - Ensino Médio de Economia e Contabilidade": [
+          "Matemática",
+          "Português",
+          "Inglês",
+          "Estatística",
+          "Contabilidade Geral",
+          "Contabilidade Financeira",
+          "Economia"
+        ],
+        "Explicações - Ensino Médio PUNIV (Ciências Exactas)": [
+          "Matemática",
+          "Física",
+          "Química",
+          "Português",
+          "Inglês",
+          "Geometria Descritiva"
+        ]
+      }
+
+      return courseSubjects[selectedCourse.title] || subjects
+    } else if (formData.type === "curso" && formData.selectedCourse) {
+      // Para cursos profissionais, sugerir disciplinas relacionadas baseadas nas tecnologias
+      const selectedCourse = APP_CONFIG.courses.list.find(
+        course => course.title === formData.selectedCourse
+      )
+
+      if (!selectedCourse) return subjects
+
+      const professionalCourseSubjects: { [key: string]: string[] } = {
+        "Desenvolvimento Web FullStack": [
+          "Matemática",
+          "Inglês",
+          "Sistemas De Informação",
+          "Técnicas De Linguagem De Programação",
+          "Tecnologias De Informação e Comunicação"
+        ],
+        "Front-end & Web Designer": [
+          "Matemática",
+          "Inglês",
+          "Produção De Multimidia",
+          "Técnicas De Linguagem De Programação",
+          "Tecnologias De Informação e Comunicação"
+        ],
+        "Programação de Microcontroladores": [
+          "Matemática",
+          "Física",
+          "Inglês",
+          "Electrónica",
+          "Electrotecnia",
+          "Técnicas De Linguagem De Programação"
+        ],
+        "Redes de Computadores (Básico a Avançado)": [
+          "Matemática",
+          "Inglês",
+          "Sistemas De Informação",
+          "Telecomunicações",
+          "Tecnologias De Telecomunicações"
+        ],
+        "Administração de Servidores Linux": [
+          "Matemática",
+          "Inglês",
+          "Sistemas De Informação",
+          "Sistema De Exploração E Arquitectura De Computadores"
+        ]
+      }
+
+      return professionalCourseSubjects[selectedCourse.title] || subjects
     }
 
-    const selectedCourse = APP_CONFIG.courses.list.find(
-      course => course.title === formData.selectedCourse
-    )
-
-    if (!selectedCourse) return subjects
-
-    // Mapear cursos específicos para suas disciplinas
-    const courseSubjects: { [key: string]: string[] } = {
-      "Explicações - Curso Médio de Informática": [
-        "Matemática",
-        "Física",
-        "Português",
-        "Inglês",
-        "Sistemas De Informação",
-        "Sistemas Digitais",
-        "Telecomunicações",
-        "Tecnologias De Telecomunicações",
-        "Tecnologias De Informação e Comunicação",
-        "Técnicas De Linguagem De Programação",
-        "Sistema De Exploração E Arquitectura De Computadores"
-      ],
-      "Explicações - Curso Médio de Electrónica": [
-        "Matemática",
-        "Física",
-        "Português",
-        "Inglês",
-        "Electrónica",
-        "Electrotecnia",
-        "Electricidade",
-        "Desnho Técnico",
-        "Prática Oficinal"
-      ],
-      "Explicações - Curso Médio de Informática e Multimédia": [
-        "Matemática",
-        "Física",
-        "Português",
-        "Inglês",
-        "Sistemas De Informação",
-        "Produção De Multimidia",
-        "Tecnologias De Informação e Comunicação",
-        "Técnicas De Linguagem De Programação"
-      ],
-      "Explicações - Ensino Primário (5º ao 6º ano)": [
-        "Matemática",
-        "Português",
-        "Inglês",
-        "Estudo Do Meio"
-      ],
-      "Explicações - Ensino Médio de Economia e Contabilidade": [
-        "Matemática",
-        "Português",
-        "Inglês",
-        "Estatística",
-        "Contabilidade Geral",
-        "Contabilidade Financeira",
-        "Economia"
-      ],
-      "Explicações - Ensino Médio PUNIV (Ciências Exactas)": [
-        "Matemática",
-        "Física",
-        "Química",
-        "Português",
-        "Inglês",
-        "Geometria Descritiva"
-      ]
-    }
-
-    return courseSubjects[selectedCourse.title] || subjects
+    return subjects
   }
 
   return (

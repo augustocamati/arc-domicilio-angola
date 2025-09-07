@@ -134,10 +134,25 @@ const EnrollmentForm = () => {
           [field]: value,
           duration: selectedCourse.duration || prev.duration,
           // Reset subjects when changing course
-          subjects: []
+          subjects: [],
+          // Auto-fill course field for explicações based on the selected explanation type
+          currentCourse: formData.type === "explicacao" ? getRelatedCourse(value) : prev.currentCourse,
         }))
       }
     }
+  }
+
+  // Helper function to determine the related course based on explanation type
+  const getRelatedCourse = (explicationType: string): string => {
+    const courseMapping: { [key: string]: string } = {
+      "Explicações - Curso Médio de Informática": "Curso Médio de Informática",
+      "Explicações - Curso Médio de Electrónica": "Curso Médio de Electrónica", 
+      "Explicações - Curso Médio de Informática e Multimédia": "Curso Médio de Informática e Multimédia",
+      "Explicações - Ensino Primário (5º ao 6º ano)": "Ensino Primário",
+      "Explicações - Ensino Médio de Economia e Contabilidade": "Curso Médio de Economia e Contabilidade",
+      "Explicações - Ensino Médio PUNIV (Ciências Exactas)": "Ensino Médio PUNIV (Ciências Exactas)"
+    }
+    return courseMapping[explicationType] || ""
   }
 
   const handleSubjectChange = (subject: string, checked: boolean) => {
